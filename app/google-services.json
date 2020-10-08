@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "64195272210",
+    "firebase_url": "https://geofriend-e6ec0.firebaseio.com",
+    "project_id": "geofriend-e6ec0",
+    "storage_bucket": "geofriend-e6ec0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:64195272210:android:c10a7fd34dc6ad48ce42cb",
+        "android_client_info": {
+          "package_name": "com.geofriend.geofriend"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "64195272210-28ooggkvsci8ikeikbdkdu93vim7cmrj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASp8_bAshXy_rXbKoUG4uSiVHcMM3kqpM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "64195272210-28ooggkvsci8ikeikbdkdu93vim7cmrj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
