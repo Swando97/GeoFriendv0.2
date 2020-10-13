@@ -170,7 +170,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             FirebaseUser user = mAuth.getCurrentUser();
                             sendEmailVerification();
 
-                            updateUI(user);
+                            //updateUI(user);
                         } else {
 
                             // If sign in fails, display a message to the user.
@@ -261,7 +261,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } else if (i == R.id.signOutButton) {
             signOut();
         } else if (i == R.id.exploreButton) {
-            Intent toExplore = new Intent(LoginActivity.this, MainActivity.class);
+            Intent toExplore = new Intent(LoginActivity.this, MapsActivity.class);
             startActivity(toExplore);
         } else if (i == R.id.reloadButton) {
             reload();
