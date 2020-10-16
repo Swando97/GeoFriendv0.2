@@ -31,7 +31,7 @@ public class bridge {
         db.collection("tour").document(t1.getName()).set(t1);
     }
 
-    public LandMark searchLandMarkByName(String s1){
+    public LandMark searchLandMark(String s1){
 
         DocumentReference docRef = db.collection("landmark").document(s1);
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -46,7 +46,7 @@ public class bridge {
 
 
 
-    public Tour searchTourByName(String s1){
+    public Tour searchTour(String s1){
         DocumentReference docRef = db.collection("tour").document(s1);
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
