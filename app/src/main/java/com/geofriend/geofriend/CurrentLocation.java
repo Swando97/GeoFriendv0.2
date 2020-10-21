@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.GeofencingClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
@@ -22,12 +23,15 @@ public class CurrentLocation extends AppCompatActivity {
     private TextView textView;
     private FusedLocationProviderClient locationClient;
     private final int REQUEST_PERMISSION_LOCATION=1;
+    private GeofencingClient geofencingClient;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_location);
+
+        geofencingClient = LocationServices.getGeofencingClient(this);
 
         locationClient = LocationServices.getFusedLocationProviderClient(this);
         btn = findViewById(R.id.getLocationBtn);

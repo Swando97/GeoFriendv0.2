@@ -73,5 +73,6 @@
     <string name="location">Location</string>
     <string name="get_location">Get Location</string>
     <string name="geofence">Geofence</string>
+    <string name="title_activity_google_maps">Map</string>
 
 </resources>
