@@ -146,6 +146,15 @@
                 android:layout_weight="1"
                 android:text="@string/explore"
                 android:theme="@style/ThemeOverlay.MyDarkButton" />
+            <Button
+                android:id="@+id/geofenceButton"
+                android:layout_marginStart="@dimen/button_horizontal_margin"
+                android:layout_marginEnd="@dimen/button_horizontal_margin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/geofence"
+                android:theme="@style/ThemeOverlay.MyDarkButton" />
 
             <Button
                 android:id="@+id/reloadButton"

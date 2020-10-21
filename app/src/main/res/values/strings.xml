@@ -72,5 +72,6 @@
     <string name="title_activity_maps">Map</string>
     <string name="location">Location</string>
     <string name="get_location">Get Location</string>
+    <string name="geofence">Geofence</string>
 
 </resources>

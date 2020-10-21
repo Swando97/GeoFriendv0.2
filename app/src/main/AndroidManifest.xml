@@ -16,7 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".CurrentLocation">
-
         </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

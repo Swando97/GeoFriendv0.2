@@ -49,6 +49,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mBinding.signOutButton.setOnClickListener(this);
         mBinding.exploreButton.setOnClickListener(this);
         mBinding.reloadButton.setOnClickListener(this);
+        mBinding.geofenceButton.setOnClickListener(this);
 
     }
 
@@ -265,6 +266,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             startActivity(toExplore);
         } else if (i == R.id.reloadButton) {
             reload();
+        } else if (i == R.id.geofenceButton){
+            Intent toGeofence = new Intent (this, CurrentLocation.class);
+            startActivity(toGeofence);
         }
     }
 }
