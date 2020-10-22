@@ -1,71 +1,84 @@
 package com.geofriend.geofriend;
 
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+
 public class LandMark {
-    private String Name;
-    private double Location;
-    private String Info;
-    private int Code;
+    private String mName;
+
+    private LatLng mLocation;
+    private double mLatitude;
+    private double mLongitude;
+
+    private String mDesc;
+    private int mID;
 
     public LandMark() {
     }
 
-    public LandMark(String name, double location, String info, int code) {
-        Name = name;
-        Location = location;
-        Info = info;
-        Code = code;
+    public LandMark(String mName, LatLng mLocation, double mLatitude, double mLongitude, String mDesc, int mID) {
+        mName = this.mName;
+
+        mLocation = this.mLocation;
+        mLatitude = this.mLatitude;
+        mLongitude = this.mLongitude;
+
+        mDesc = this.mDesc;
+        mID = this.mID;
     }
 
     //copy constructor using in modify landmark
     public LandMark(LandMark old) {
-        Name = old.getName();
-        Location = old.getLocation();
-        Info = old.getInfo();
-        Code = old.getCode();
+        mName = old.getName();
+        mLocation = old.getLocation();
+        mDesc = old.getDesc();
+        mID = old.getID();
     }
+
+
 
     public String getName() {
-        return Name;
+        return mName;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public void setName(String mName) {
+        mName = this.mName;
     }
 
-    public double getLocation() {
-        return Location;
+    public LatLng getLocation() {
+        return mLocation;
     }
 
-    public void setLocation(double location) {
-        Location = location;
+    public void setLocation(double mLatitude, double mLongitude) {
+        this.mLocation = new LatLng(mLatitude, mLongitude);
     }
 
-    public String getInfo() {
-        return Info;
+    public String getDesc() {
+        return mDesc;
     }
 
-    public void setInfo(String info) {
-        Info = info;
+    public void setDesc(String mDesc) {
+        mDesc = this.mDesc;
     }
 
-    public int getCode() {
-        return Code;
+    public int getID() {
+        return mID;
     }
 
-    public void setCode(int code) {
-        Code = code;
+    public void setID(int mID) {
+        mID = this.mID;
     }
 
 
     //Working on Database
 
     //search LandMark by code in Database then assign the data in the object
-    public void searchByCode(int Code){
+    public void searchByID(int ID){
 
     }
 
     //search LandMark by code in Database then assign the data in the object
-    public void searchByLocation(double location){
+    public void searchByLocation(LatLng searchLocation){
 
     }
 
@@ -80,17 +93,17 @@ public class LandMark {
     }
 
     //add this object to database(use as create new object)
-    public void addLanMark(){
+    public void addLandMark(){
 
     }
 
     //update object to database(use as modify exist object)
-    public void updateLandMark(String name, double location, String info, int code){
-        LandMark old=new LandMark(Name,Location,Info,Code);
-        setName(name);
-        setInfo(info);
-        setLocation(location);
-        setCode(code);
+    public void updateLandMark(String mName, double mLatitude, double mLongitude, String mDesc, int mID){
+        LandMark old = new LandMark(mName, mLocation, mLatitude, mLatitude, mDesc, mID);
+        setName(mName);
+        setDesc(mDesc);
+        setLocation(mLocation.latitude, mLocation.longitude);
+        setID(mID);
 
         //replace the old object with the new object in database
 
