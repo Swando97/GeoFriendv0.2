@@ -2,8 +2,13 @@ package com.geofriend.geofriend;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class LandMark {
+
+    //GLOBALS
+    private int mID;
+
     private String mName;
 
     private LatLng mLocation;
@@ -11,29 +16,28 @@ public class LandMark {
     private double mLongitude;
 
     private String mDesc;
-    private int mID;
+    //GLOBALS
 
-    public LandMark() {
-    }
+    public LandMark(int mID, String mName, double mLatitude, double mLongitude, String mDesc) {
 
-    public LandMark(String mName, LatLng mLocation, double mLatitude, double mLongitude, String mDesc, int mID) {
+        mID = this.mID;
         mName = this.mName;
 
-        mLocation = this.mLocation;
+        this.mLocation = new LatLng(mLatitude, mLongitude);
         mLatitude = this.mLatitude;
         mLongitude = this.mLongitude;
 
         mDesc = this.mDesc;
-        mID = this.mID;
+
     }
 
     //copy constructor using in modify landmark
-    public LandMark(LandMark old) {
-        mName = old.getName();
-        mLocation = old.getLocation();
-        mDesc = old.getDesc();
-        mID = old.getID();
-    }
+//    public LandMark(LandMark old) {
+//        mName = old.getName();
+//        mLocation = old.getLocation();
+//        mDesc = old.getDesc();
+//        mID = old.getID();
+//    }
 
 
 
@@ -98,8 +102,8 @@ public class LandMark {
     }
 
     //update object to database(use as modify exist object)
-    public void updateLandMark(String mName, double mLatitude, double mLongitude, String mDesc, int mID){
-        LandMark old = new LandMark(mName, mLocation, mLatitude, mLatitude, mDesc, mID);
+    public void updateLandMark(int mID, String mName, double mLatitude, double mLongitude, String mDesc){
+        LandMark old = new LandMark(mID, mName, mLatitude, mLatitude, mDesc);
         setName(mName);
         setDesc(mDesc);
         setLocation(mLocation.latitude, mLocation.longitude);

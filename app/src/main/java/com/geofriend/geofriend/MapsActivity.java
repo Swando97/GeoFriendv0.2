@@ -11,9 +11,15 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    LandmarkAdapter la = new LandmarkAdapter();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +29,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        la.loadLandmarks();
     }
 
     /**
@@ -36,11 +44,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
         mMap = googleMap;
 
-        // Add a marker in Kamloops and move the camera
-        LatLng sydney = new LatLng(-34,151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Kamloops"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+
+        if(!la.landmarks.isEmpty()) {
+            for(int i = 0; i < la.landmarks.size(); i++) {
+                mMap.addMarker(new MarkerOptions().position(la.landmarks.get(i).getLocation()).title(la.landmarks.get(i).getName()));
+            }
+        }
+
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(50.66107816, -120.2600196)));
     }
 }
