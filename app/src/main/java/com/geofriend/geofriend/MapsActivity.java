@@ -1,6 +1,8 @@
 package com.geofriend.geofriend;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -9,6 +11,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
@@ -30,6 +33,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        //Loads landmarks into the adapter instance
         la.loadLandmarks();
     }
 
@@ -55,8 +59,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }
 
+        //Moves camera to a park nearby my house.
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(50.66107816, -120.2600196), 16.0f));
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(50.66107816, -120.2600196), 18.0f));
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                int markerClick = Log.v("click", "Markerclick");
+                Intent intent = new Intent(MapsActivity.this, LandmarkPopUpActivity.class);
+                startActivity(intent);
+                return false;
+            }
+        });
 
     }
 }

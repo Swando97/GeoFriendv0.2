@@ -37,6 +37,8 @@
             android:value="@string/google_maps_key" />
 
         <activity android:name=".CurrentLocation"></activity>
+        <activity android:name=".LandmarkPopUpActivity" android:theme="@style/AppTheme.LandmarkTheme">
+        </activity>
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
