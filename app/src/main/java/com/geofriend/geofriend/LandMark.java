@@ -20,14 +20,14 @@ public class LandMark {
 
     public LandMark(int mID, String mName, double mLatitude, double mLongitude, String mDesc) {
 
-        mID = this.mID;
-        mName = this.mName;
+        this.mID = mID;
+        this.mName = mName;
 
         this.mLocation = new LatLng(mLatitude, mLongitude);
-        mLatitude = this.mLatitude;
-        mLongitude = this.mLongitude;
+        this.mLatitude = mLatitude;
+        this.mLongitude = mLongitude;
 
-        mDesc = this.mDesc;
+        this.mDesc = mDesc;
 
     }
 
@@ -46,7 +46,7 @@ public class LandMark {
     }
 
     public void setName(String mName) {
-        mName = this.mName;
+        this.mName = mName;
     }
 
     public LatLng getLocation() {
@@ -62,7 +62,7 @@ public class LandMark {
     }
 
     public void setDesc(String mDesc) {
-        mDesc = this.mDesc;
+        this.mDesc = mDesc;
     }
 
     public int getID() {
@@ -70,7 +70,7 @@ public class LandMark {
     }
 
     public void setID(int mID) {
-        mID = this.mID;
+        this.mID = mID;
     }
 
 
