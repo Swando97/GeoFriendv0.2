@@ -70,9 +70,11 @@
     <string name="multi_factor_signed_out">You are not signed in. To use this sample, first navigate to the Email/Password example to sign in and then return here to enroll in multi-factor auth.</string>
     <string name="landing_page">Landing Page</string>
     <string name="title_activity_maps">Map</string>
-    <string name="location">Location</string>
+    <string name="location">Loading Location...</string>
     <string name="get_location">Get Location</string>
     <string name="geofence">Geofence</string>
     <string name="title_activity_google_maps">Map</string>
+    <string name="get_coordinates">Get Coordinates</string>
+    <string name="gps_location">GPS Location:</string>
 
 </resources>
