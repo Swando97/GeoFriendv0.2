@@ -1,11 +1,25 @@
 package com.geofriend.geofriend;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.ResultReceiver;
 import android.util.Log;
+import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -23,6 +37,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     LandmarkAdapter la = new LandmarkAdapter();
 
+    // Location variables used to request permissions
+    private final int REQUEST_PERMISSION_LOCATION = 2;
+    private LocationCallback locationCallback;
+    private FusedLocationProviderClient locationClient;
+    private Location currentLocation;
+    private LocationAddressResultReceiverTest addressResultReceiver;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +56,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //Loads landmarks into the adapter instance
         la.loadLandmarks();
+
+        // Permission for current location
+        locationClient = LocationServices.getFusedLocationProviderClient(this);
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                currentLocation = locationResult.getLocations().get(0);
+                getAddress();
+            }
+        };
     }
 
     /**
@@ -71,6 +102,60 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 return false;
             }
         });
+        startLocationUpdates();
+    }
 
+    // permission to access users current location
+    private void startLocationUpdates() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new
+                            String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_PERMISSION_LOCATION);
+        } else {
+            LocationRequest locationRequest = new LocationRequest();
+            locationRequest.setInterval(2000);
+            locationRequest.setFastestInterval(1000);
+            locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+            locationClient.requestLocationUpdates(locationRequest, locationCallback, null);
+        }
+    }
+
+    private void getAddress() {
+        if (!Geocoder.isPresent()) {
+            Toast.makeText(MapsActivity.this, "Can't find current address, ",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Intent intent = new Intent(this,GetAddressIntentService.class);
+        intent.putExtra("add_receiver", addressResultReceiver);
+        intent.putExtra("add_location", currentLocation);
+        startService(intent);
+    }
+
+    private class LocationAddressResultReceiverTest extends ResultReceiver implements com.geofriend.geofriend.LocationAddressResultReceiver {
+        LocationAddressResultReceiverTest(Handler handler) {
+            super(handler);
+        }
+
+        @Override
+        protected void onReceiveResult(int resultCode, Bundle resultData) {
+            if (resultCode == 0) {
+                Log.d("Address", "Location null retrying");
+                getAddress();
+            }
+            if (resultCode == 1) {
+                Toast.makeText(MapsActivity.this, "Address not found, ", Toast.LENGTH_SHORT).show();
+            }
+            String currentAdd = resultData.getString("address_result");
+            showResults(currentAdd);
+        }
+
+        private void showResults(String currentAdd) {
+            //textView.setText(currentAdd);
+
+            Toast message = Toast.makeText(getApplicationContext(),currentAdd,Toast.LENGTH_LONG);
+            message.show();
+        }
     }
 }

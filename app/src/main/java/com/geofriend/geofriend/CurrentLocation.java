@@ -44,6 +44,8 @@ public class CurrentLocation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_location);
 
+        geofencingClient = LocationServices.getGeofencingClient(this);
+
         addressResultReceiver = new LocationAddressResultReceiver(new Handler());
         textView = findViewById(R.id.currentLocationTxt);
         gpsText = findViewById(R.id.coordinates);
