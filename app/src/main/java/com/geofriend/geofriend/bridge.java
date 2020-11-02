@@ -86,10 +86,47 @@ public class bridge {
             }
         });
     }
+    
+    //search the document name by name
+    //need to separate it with the searchLandMark into two step as sometime it need double click to work
+    //make sure it search the document name first before running step2
+    /*sample:
+    String g;
+    LandMark lc;
+    public void step1(){
+        b.searchLandMarkByName("Library");
+        g=b.p;
+        TextView t1=findViewById(R.id.testing);
+
+        t1.setText(g);
+    }
+    
+    public void step2(){
+        b.searchLandMark(g);
+        TextView t2=findViewById(R.id.testing2);
+
+        t2.setText(b.l1.getDesc());
+    }
+    */
+    public void searchLandMarkByName(String s){
+        db.collection("landmark").whereEqualTo("name",s).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String s=document.getId();
+                        setp(s);
+                    }
+                } else {
+                    //Log.d(TAG, "Error getting documents: ", task.getException());
+                }
+            }
+        });
+    }
 
 
 
-    public Tour searchTour(String s1){
+    /*public Tour searchTour(String s1){
         DocumentReference docRef = db.collection("tour").document(s1);
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -99,7 +136,7 @@ public class bridge {
             }
         });
         return t1;
-    }
+    }*/
 
     public void deleteData(){
 
