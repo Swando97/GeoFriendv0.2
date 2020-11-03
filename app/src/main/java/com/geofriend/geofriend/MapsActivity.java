@@ -6,9 +6,11 @@ import android.content.pm.PackageManager;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Build;
 import android.os.Handler;
 import android.os.ResultReceiver;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
@@ -20,6 +22,7 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -32,17 +35,22 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     LandmarkAdapter la = new LandmarkAdapter();
 
     // Location variables used to request permissions
+    private Location currentLocation;
+    private FusedLocationProviderClient locationClient;
     private final int REQUEST_PERMISSION_LOCATION = 2;
     private LocationCallback locationCallback;
-    private FusedLocationProviderClient locationClient;
-    private Location currentLocation;
+
+    // Location variable used to display results
     private LocationAddressResultReceiverTest addressResultReceiver;
+
+    private TextView userLocation;
 
 
     @Override
@@ -57,7 +65,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //Loads landmarks into the adapter instance
         la.loadLandmarks();
 
-        // Permission for current location
+
+
+        userLocation = findViewById(R.id.landMarkTxt);
+
+        // ----- This is used to display current location information -----
         locationClient = LocationServices.getFusedLocationProviderClient(this);
         locationCallback = new LocationCallback() {
             @Override
@@ -66,6 +78,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 getAddress();
             }
         };
+        // ----- This is used to display current location information -----
     }
 
     /**
@@ -102,10 +115,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 return false;
             }
         });
+        // ----- Check the location permission status -----
+        // Example: If not already granted, request for location permission
         startLocationUpdates();
     }
 
-    // permission to access users current location
+    // Permission to access users current location
     private void startLocationUpdates() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED) {
@@ -152,10 +167,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         private void showResults(String currentAdd) {
-            //textView.setText(currentAdd);
-
-            Toast message = Toast.makeText(getApplicationContext(),currentAdd,Toast.LENGTH_LONG);
-            message.show();
+            userLocation.setText(currentAdd);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        startLocationUpdates();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        locationClient.removeLocationUpdates(locationCallback);
     }
 }

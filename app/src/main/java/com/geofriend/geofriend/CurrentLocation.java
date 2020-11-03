@@ -34,7 +34,7 @@ public class CurrentLocation extends AppCompatActivity {
     private TextView textView, gpsText;
     private FusedLocationProviderClient locationClient;
     private final int REQUEST_PERMISSION_LOCATION = 2;
-    private LocationAddressResultReceiver addressResultReceiver;
+    public LocationAddressResultReceiver addressResultReceiver;
     private Location currentLocation;
     private LocationCallback locationCallback;
     private GeofencingClient geofencingClient;
