@@ -41,6 +41,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     LandmarkAdapter la = new LandmarkAdapter();
 
+
+    private Location CurrentLocation;
+    private Location MarkerLocation;
+
+
     // Location variables used to request permissions
     private Location currentLocation;
     private FusedLocationProviderClient locationClient;
@@ -94,8 +99,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
 
         mMap = googleMap;
+/*
+        CurrentLocation.setLatitude(currentLocation.getLatitude());
+        CurrentLocation.setLongitude(currentLocation.getLongitude());
 
+        MarkerLocation.setLatitude();
+        MarkerLocation.setLongitude();
+*/
+       int MarkerID;
 
+        // Distance Checking
 
         if(!la.landmarks.isEmpty()) {
             for(int i = 0; i < la.landmarks.size(); i++) {
@@ -109,10 +122,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
+
+                la.landmarks.get(Integer.parseInt(marker.getId()));
+//                MarkerLocation.setLatitude();
+
+
+
                 int markerClick = Log.v("click", "Markerclick");
                 Intent intent = new Intent(MapsActivity.this, LandmarkPopUpActivity.class);
                 startActivity(intent);
                 return false;
+
+
             }
         });
         // ----- Check the location permission status -----
