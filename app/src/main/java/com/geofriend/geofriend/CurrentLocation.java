@@ -85,13 +85,13 @@ public class CurrentLocation extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
             return;
         }
-        Intent intent = new Intent(this,GetAddressIntentService.class);
+        Intent intent = new Intent(this, GetAddressIntentService.class);
         intent.putExtra("add_receiver", addressResultReceiver);
         intent.putExtra("add_location", currentLocation);
         startService(intent);
     }
 
-    /* @Override
+    /*@Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull
             int[] grantResults) {
         if (requestCode == REQUEST_PERMISSION_LOCATION) {
@@ -102,7 +102,7 @@ public class CurrentLocation extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             }
         }
-    } */
+    }*/
 
     private class LocationAddressResultReceiver extends ResultReceiver implements com.geofriend.geofriend.LocationAddressResultReceiver {
         LocationAddressResultReceiver(Handler handler) {

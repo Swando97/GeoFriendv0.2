@@ -52,7 +52,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LocationCallback locationCallback;
 
     // Location variable used to display results
-    private LocationAddressResultReceiverTest addressResultReceiver;
+    //private LocationAddressResultReceiverTest addressResultReceiver;
 
     private TextView userLocation;
 
@@ -69,10 +69,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //Loads landmarks into the adapter instance
         la.loadLandmarks();
 
-
-
-
-
 //        userLocation = findViewById(R.id.landMarkTxt);
 
         // ----- This is used to display current location information -----
@@ -81,7 +77,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onLocationResult(LocationResult locationResult) {
                 currentLocation = locationResult.getLocations().get(0);
-                getAddress();
+                //getAddress();
             }
         };
         // ----- This is used to display current location information -----
@@ -152,7 +148,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    private void getAddress() {
+    /*private void getAddress() {
         if (!Geocoder.isPresent()) {
             Toast.makeText(MapsActivity.this, "Can't find current address, ",
                     Toast.LENGTH_SHORT).show();
@@ -162,9 +158,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         intent.putExtra("add_receiver", addressResultReceiver);
         intent.putExtra("add_location", currentLocation);
         startService(intent);
-    }
+    } */
 
-    private class LocationAddressResultReceiverTest extends ResultReceiver implements com.geofriend.geofriend.LocationAddressResultReceiver {
+    /*private class LocationAddressResultReceiverTest extends ResultReceiver implements com.geofriend.geofriend.LocationAddressResultReceiver {
         LocationAddressResultReceiverTest(Handler handler) {
             super(handler);
         }
@@ -185,7 +181,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         private void showResults(String currentAdd) {
             userLocation.setText(currentAdd);
         }
-    }
+    }*/
 
     @Override
     protected void onResume() {
