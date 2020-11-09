@@ -98,6 +98,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+//         ----- Check the location permission status -----
+//         Example: If not already granted, request for location permission
+//        startLocationUpdates();
 
         mMap = googleMap;
 
@@ -131,9 +134,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             }
         });
-//         ----- Check the location permission status -----
-//         Example: If not already granted, request for location permission
-        startLocationUpdates();
+
     }
 
     // Permission to access users current location
