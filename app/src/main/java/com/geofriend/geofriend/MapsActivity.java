@@ -41,9 +41,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     LandmarkAdapter la = new LandmarkAdapter();
 
+    private double mLat, mLng, cLat, cLng;
 
-    private Location CurrentLocation;
-    private Location MarkerLocation;
 
 
     // Location variables used to request permissions
@@ -72,7 +71,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-        userLocation = findViewById(R.id.landMarkTxt);
+
+
+//        userLocation = findViewById(R.id.landMarkTxt);
 
         // ----- This is used to display current location information -----
         locationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -99,16 +100,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
 
         mMap = googleMap;
-/*
-        CurrentLocation.setLatitude(currentLocation.getLatitude());
-        CurrentLocation.setLongitude(currentLocation.getLongitude());
 
-        MarkerLocation.setLatitude();
-        MarkerLocation.setLongitude();
-*/
-       int MarkerID;
-
-        // Distance Checking
+        final String landmarkID = "";
 
         if(!la.landmarks.isEmpty()) {
             for(int i = 0; i < la.landmarks.size(); i++) {
@@ -117,27 +110,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         //Moves camera to a park nearby my house.
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(50.66107816, -120.2600196), 16.0f));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(50.66107816, -120.2600196), 17.0f));
 
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
 
-                la.landmarks.get(Integer.parseInt(marker.getId()));
-//                MarkerLocation.setLatitude();
+//                mLat = la.landmarks.get(Integer.parseInt(marker.getId().substring(1))).getLocation().latitude;
+//                mLng = la.landmarks.get(Integer.parseInt(marker.getId().substring(1))).getLocation().longitude;
 
 
 
-                int markerClick = Log.v("click", "Markerclick");
-                Intent intent = new Intent(MapsActivity.this, LandmarkPopUpActivity.class);
-                startActivity(intent);
-                return false;
+
+                    int markerClick = Log.v("click", "Markerclick");
+                    Intent intent = new Intent(MapsActivity.this, LandmarkPopUpActivity.class);
+                    intent.putExtra("landmarkID", marker.getId().substring(1));
+                    startActivity(intent);
+                    return false;
 
 
             }
         });
-        // ----- Check the location permission status -----
-        // Example: If not already granted, request for location permission
+//         ----- Check the location permission status -----
+//         Example: If not already granted, request for location permission
         startLocationUpdates();
     }
 
