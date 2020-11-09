@@ -3,7 +3,8 @@ package com.geofriend.geofriend;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LandmarkAdapter {
+public class
+LandmarkAdapter {
 
     public static List<LandMark> landmarks = new ArrayList<LandMark>();
 

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:padding="16dp"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/locationImage"
+        android:src="@color/colorAccent"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        />
+    <TextView
+        android:id="@+id/txtLocationName"
+        android:layout_toRightOf="@+id/locationImage"
+        android:layout_marginLeft="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:text="Location Name"
+        />
+
+    <TextView
+        android:id="@+id/txtLocationNameSub"
+        android:layout_toRightOf="@+id/locationImage"
+        android:layout_marginLeft="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtLocationName"
+        style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
+        android:text="Location SubTitle"
+        />
+
+</RelativeLayout>
+

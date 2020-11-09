@@ -17,6 +17,7 @@ import android.os.ResultReceiver;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,8 @@ import com.google.android.gms.location.GeofencingClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import java.util.ArrayList;
+
 public class CurrentLocation extends AppCompatActivity {
 
     private Button btn;
@@ -37,6 +40,8 @@ public class CurrentLocation extends AppCompatActivity {
     public LocationAddressResultReceiver addressResultReceiver;
     private Location currentLocation;
     private LocationCallback locationCallback;
+    private ListView listViewLocationDisplay;
+
     private GeofencingClient geofencingClient;
 
     @Override
@@ -49,7 +54,15 @@ public class CurrentLocation extends AppCompatActivity {
         addressResultReceiver = new LocationAddressResultReceiver(new Handler());
         textView = findViewById(R.id.currentLocationTxt);
         gpsText = findViewById(R.id.coordinates);
+        listViewLocationDisplay = findViewById(R.id.listViewLocations);
         //geofencingClient = LocationServices.getGeofencingClient(this);
+
+        // Array List for LandMark Locations
+        ArrayList<LandMark> arrayList = new ArrayList<>();
+
+        arrayList.add(new LandMark(100, "TRU HOL", 50.675940, -120.360050, "Testing the description"));
+        arrayList.add(new LandMark(101, "Kamloops Downtown", 52.675940, -124.360050, "Testing... description"));
+        arrayList.add(new LandMark(102, "TRU HOL", 48.675940, -118.360050, "Testing ..."));
 
         locationClient = LocationServices.getFusedLocationProviderClient(this);
         locationCallback = new LocationCallback() {
