@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient">
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="75dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="96dp"
+        android:layout_width="174dp"
+        android:layout_height="164dp"
+        android:layout_marginTop="36dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -17,13 +18,16 @@
 
     <TextView
         android:id="@+id/landmarkDescription"
-        android:layout_width="148dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="68dp"
+        android:layout_width="290dp"
+        android:layout_height="89dp"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/aldrich"
         android:text="Click me to learn about this landmark!"
         android:textAlignment="center"
+        android:textColor="#100F0F"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
