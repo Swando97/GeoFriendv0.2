@@ -16,18 +16,26 @@ public class LandMark {
     private double mLongitude;
 
     private String mDesc;
+
+    private int mImage;
     //GLOBALS
 
-    public LandMark(int mID, String mName, double mLatitude, double mLongitude, String mDesc) {
+    public LandMark(int mID, String mName, double mLatitude, double mLongitude, String mDesc, int mImage) {
 
+        // ID and NAME
         this.mID = mID;
         this.mName = mName;
 
+        // LOCATION, LATITUDE, and LONGITUDE
         this.mLocation = new LatLng(mLatitude, mLongitude);
         this.mLatitude = mLatitude;
         this.mLongitude = mLongitude;
 
+        // LANDMARK DESCRIPTION
         this.mDesc = mDesc;
+
+        // LANDMARK IMAGE
+        this.mImage = mImage;
 
     }
 
@@ -73,6 +81,14 @@ public class LandMark {
         this.mID = mID;
     }
 
+    public int getImage(){
+        return mImage;
+    }
+
+    public void setImage(int mImage){
+        this.mImage = mImage;
+    }
+
 
     //Working on Database
 
@@ -101,6 +117,7 @@ public class LandMark {
 
     }
 
+/*
     //update object to database(use as modify exist object)
     public void updateLandMark(int mID, String mName, double mLatitude, double mLongitude, String mDesc){
         LandMark old = new LandMark(mID, mName, mLatitude, mLatitude, mDesc);
@@ -112,5 +129,6 @@ public class LandMark {
         //replace the old object with the new object in database
 
     }
+*/
 
 }

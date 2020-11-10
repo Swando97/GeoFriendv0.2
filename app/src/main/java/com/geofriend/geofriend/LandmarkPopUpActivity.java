@@ -1,12 +1,10 @@
 package com.geofriend.geofriend;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +22,7 @@ public class LandmarkPopUpActivity extends AppCompatActivity {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
-        final LandmarkAdapter la = new LandmarkAdapter();
+        final LandmarkMapAdapter lma = new LandmarkMapAdapter();
 
         int width = dm.widthPixels;
         int height = dm.heightPixels;
@@ -45,7 +43,7 @@ public class LandmarkPopUpActivity extends AppCompatActivity {
         landmarkDesc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                landmarkDesc.setText(la.landmarks.get(Integer.parseInt(landmarkID)).getDesc());
+                landmarkDesc.setText(lma.landmarks.get(Integer.parseInt(landmarkID)).getDesc());
             }
         });
     }

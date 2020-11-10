@@ -21,15 +21,14 @@
         />
 
     <TextView
-        android:id="@+id/txtLocationNameSub"
-        android:layout_toRightOf="@+id/locationImage"
-        android:layout_marginLeft="20dp"
+        android:id="@+id/txtLocationDesc"
+        style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtLocationName"
-        style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
-        android:text="Location SubTitle"
-        />
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/locationImage"
+        android:text="Location Description" />
 
 </RelativeLayout>
 

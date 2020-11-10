@@ -1,6 +1,5 @@
 package com.geofriend.geofriend;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -41,6 +40,8 @@ public class CurrentLocation extends AppCompatActivity {
     private Location currentLocation;
     private LocationCallback locationCallback;
     private ListView listViewLocationDisplay;
+    private LandmarkMapAdapter lma;
+    private LandmarkListAdapter lla;
 
     private GeofencingClient geofencingClient;
 
@@ -57,12 +58,14 @@ public class CurrentLocation extends AppCompatActivity {
         listViewLocationDisplay = findViewById(R.id.listViewLocations);
         //geofencingClient = LocationServices.getGeofencingClient(this);
 
-        // Array List for LandMark Locations
-        ArrayList<LandMark> arrayList = new ArrayList<>();
+        // Array List for LandMark Locations and Adapter Instantiation
+        lma.loadLandmarks();
+        lla = new LandmarkListAdapter(this, R.layout.list_row, lma.landmarks);
 
-        arrayList.add(new LandMark(100, "TRU HOL", 50.675940, -120.360050, "Testing the description"));
-        arrayList.add(new LandMark(101, "Kamloops Downtown", 52.675940, -124.360050, "Testing... description"));
-        arrayList.add(new LandMark(102, "TRU HOL", 48.675940, -118.360050, "Testing ..."));
+        // Populate ListView
+        listViewLocationDisplay.setAdapter(lla);
+
+
 
         locationClient = LocationServices.getFusedLocationProviderClient(this);
         locationCallback = new LocationCallback() {

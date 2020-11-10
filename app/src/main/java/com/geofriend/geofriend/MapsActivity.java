@@ -3,15 +3,10 @@ package com.geofriend.geofriend;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
-import android.os.Build;
-import android.os.Handler;
-import android.os.ResultReceiver;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -22,7 +17,6 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -31,15 +25,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    LandmarkAdapter la = new LandmarkAdapter();
+    LandmarkMapAdapter lma = new LandmarkMapAdapter();
 
     private double mLat, mLng, cLat, cLng;
 
@@ -67,7 +57,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
         //Loads landmarks into the adapter instance
-        la.loadLandmarks();
+        lma.loadLandmarks();
 
 //        userLocation = findViewById(R.id.landMarkTxt);
 
@@ -102,9 +92,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         final String landmarkID = "";
 
-        if(!la.landmarks.isEmpty()) {
-            for(int i = 0; i < la.landmarks.size(); i++) {
-                mMap.addMarker(new MarkerOptions().position(la.landmarks.get(i).getLocation()).title(la.landmarks.get(i).getName()));
+        if(!lma.landmarks.isEmpty()) {
+            for(int i = 0; i < lma.landmarks.size(); i++) {
+                mMap.addMarker(new MarkerOptions().position(lma.landmarks.get(i).getLocation()).title(lma.landmarks.get(i).getName()));
             }
         }
 
