@@ -40,7 +40,7 @@ public class CurrentLocation extends AppCompatActivity {
     private Location currentLocation;
     private LocationCallback locationCallback;
     private ListView listViewLocationDisplay;
-    private LandmarkMapAdapter lma;
+    private LandmarkMapAdapter lma = new LandmarkMapAdapter();
     private LandmarkListAdapter lla;
 
     private GeofencingClient geofencingClient;
