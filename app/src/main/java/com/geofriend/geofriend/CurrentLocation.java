@@ -65,7 +65,7 @@ public class CurrentLocation extends AppCompatActivity {
         // Populate ListView
         listViewLocationDisplay.setAdapter(lla);
 
-
+        // Set onItemClickListenrer
 
         locationClient = LocationServices.getFusedLocationProviderClient(this);
         locationCallback = new LocationCallback() {
