@@ -1,4 +1,5 @@
 package com.geofriend.geofriend;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
@@ -20,11 +21,12 @@ public class bridge {
     public LandMark l1;
     public Tour t1;
     
-    //control and pass id 
-    public String p;
+    //control and pass path
+    private String p;
     public void setp(String s){
         p=s;
     }
+
 
     public void passLandMark(LandMark l1){
         this.l1=l1;
@@ -37,35 +39,44 @@ public class bridge {
 
     public void addData(LandMark l1){
         passLandMark(l1);
-        db.collection("landmark").document(l1.getName()).set(l1);
+        db.collection("landmark").document().set(l1);
     }
 
-    public void addData(Tour t1){
+   /* public void addData(Tour t1){
         passTour(t1);
         db.collection("tour").document(t1.getName()).set(t1);
-    }
+    }*/
     
 /*to use this code we can have example:
         b.searchLandMark("OldMain");
         TextView t1=findViewById(R.id.testing);
         t1.setText(b.l1.getName());
     */
-    public void searchLandMark(String s1){
+    public void getLandMark(String s1){
 
         DocumentReference docRef = db.collection("landmark").document(s1);
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 LandMark l2 = documentSnapshot.toObject(LandMark.class);
+
                 String name=l2.getName();
                 l1.setName(name);
+
                 String desc=l2.getDesc();
                 l1.setDesc(desc);
-               int id=l2.getID();
-                l1.setID(id);
-               /* LatLng l=l2.getLocation();
-                l1.setLocation(l.latitude,l.longitude);*/
-                //missing the LatLng because of error
+
+                /*int id=l2.getID();
+                l1.setID(id);*/
+
+                double longitude=l2.getmLongitude();
+                l1.setmLongitude(longitude);
+
+                double latitude=l2.getmLatitude();
+                l1.setmLatitude(latitude);
+                LatLng l=l2.getLocation();
+                l1.setLocation(l.latitude,l.longitude);
+                
             }
         });
     }
@@ -76,14 +87,15 @@ public class bridge {
     b.searchLandMarkByID(4); //it assign the document id to string p
     b.searchLandMark(b.p);
     */
-    public void searchLandMarkByID(int i){
-        db.collection("landmark").whereEqualTo("id",i).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+    public void searchLandMarkByLatitude(double i){
+        db.collection("landmark").whereEqualTo("mLatitude",i).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         String s=document.getId();
                         setp(s);
+
                     }
                 } else {
                      //Log.d(TAG, "Error getting documents: ", task.getException());
@@ -128,6 +140,8 @@ public class bridge {
             }
         });
     }
+
+
 
 
 

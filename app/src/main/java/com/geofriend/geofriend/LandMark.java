@@ -7,7 +7,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class LandMark {
 
     //GLOBALS
-    private int mID;
+   // private int mID;
 
     private String mName;
 
@@ -18,9 +18,9 @@ public class LandMark {
     private String mDesc;
     //GLOBALS
 
-    public LandMark(int mID, String mName, double mLatitude, double mLongitude, String mDesc) {
+    public LandMark(String mName, double mLatitude, double mLongitude, String mDesc) {
 
-        this.mID = mID;
+        //this.mID = mID;
         this.mName = mName;
 
         this.mLocation = new LatLng(mLatitude, mLongitude);
@@ -65,13 +65,21 @@ public class LandMark {
         this.mDesc = mDesc;
     }
 
-    public int getID() {
+  /*  public int getID() {
         return mID;
     }
 
     public void setID(int mID) {
         this.mID = mID;
-    }
+    }*/
+
+    public double getmLatitude(){return mLatitude;}
+
+    public void setmLatitude(double b){mLatitude=b;}
+
+    public double getmLongitude(){return mLongitude;}
+
+    public void setmLongitude(double b){mLongitude=b;}
 
 
     //Working on Database
@@ -102,12 +110,12 @@ public class LandMark {
     }
 
     //update object to database(use as modify exist object)
-    public void updateLandMark(int mID, String mName, double mLatitude, double mLongitude, String mDesc){
-        LandMark old = new LandMark(mID, mName, mLatitude, mLatitude, mDesc);
+    public void updateLandMark(String mName, double mLatitude, double mLongitude, String mDesc){
+        LandMark old = new LandMark( mName, mLatitude, mLatitude, mDesc);
         setName(mName);
         setDesc(mDesc);
         setLocation(mLocation.latitude, mLocation.longitude);
-        setID(mID);
+        //setID(mID);
 
         //replace the old object with the new object in database
 

@@ -13,9 +13,9 @@ LandmarkAdapter {
     }
 
     public void loadLandmarks(){
-        landmarks.add(0, new LandMark(1, "Juniper Park", 50.66107816, -120.2600196, "A park in Juniper Ridge."));
-        landmarks.add(1, new LandMark(2, "Juniper Dog Park", 50.66165625, -120.26141435, "A dog park in Juniper Ridge."));
-        landmarks.add(2, new LandMark(3, "Juniper Roundabout", 50.661075, -120.262175, "A roundabout in Juniper Ridge."));
+        landmarks.add(0, new LandMark("Juniper Park", 50.66107816, -120.2600196, "A park in Juniper Ridge."));
+        landmarks.add(1, new LandMark( "Juniper Dog Park", 50.66165625, -120.26141435, "A dog park in Juniper Ridge."));
+        landmarks.add(2, new LandMark( "Juniper Roundabout", 50.661075, -120.262175, "A roundabout in Juniper Ridge."));
 
     }
 

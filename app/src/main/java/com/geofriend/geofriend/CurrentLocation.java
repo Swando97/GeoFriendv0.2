@@ -60,9 +60,9 @@ public class CurrentLocation extends AppCompatActivity {
         // Array List for LandMark Locations
         ArrayList<LandMark> arrayList = new ArrayList<>();
 
-        arrayList.add(new LandMark(100, "TRU HOL", 50.675940, -120.360050, "Testing the description"));
-        arrayList.add(new LandMark(101, "Kamloops Downtown", 52.675940, -124.360050, "Testing... description"));
-        arrayList.add(new LandMark(102, "TRU HOL", 48.675940, -118.360050, "Testing ..."));
+        arrayList.add(new LandMark("TRU HOL", 50.675940, -120.360050, "Testing the description"));
+        arrayList.add(new LandMark( "Kamloops Downtown", 52.675940, -124.360050, "Testing... description"));
+        arrayList.add(new LandMark("TRU HOL", 48.675940, -118.360050, "Testing ..."));
 
         locationClient = LocationServices.getFusedLocationProviderClient(this);
         locationCallback = new LocationCallback() {
@@ -178,4 +178,11 @@ public class CurrentLocation extends AppCompatActivity {
         super.onPause();
         locationClient.removeLocationUpdates(locationCallback);
     }
+
+
+    //public Button btn=findViewById(R.id.addDataPage);
+    public void addDataPage(View v){
+        startActivity(new Intent(CurrentLocation.this,activity_adddata.class));
+    }
+
 }
