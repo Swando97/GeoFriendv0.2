@@ -15,6 +15,7 @@ import android.os.Handler;
 import android.os.ResultReceiver;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -43,6 +44,7 @@ public class CurrentLocation extends AppCompatActivity {
     private LandmarkMapAdapter lma = new LandmarkMapAdapter();
     private LandmarkListAdapter lla;
 
+
     private GeofencingClient geofencingClient;
 
     @Override
@@ -65,7 +67,16 @@ public class CurrentLocation extends AppCompatActivity {
         // Populate ListView
         listViewLocationDisplay.setAdapter(lla);
 
-        // Set onItemClickListenrer
+        // Set onItemClickListener
+        listViewLocationDisplay.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(CurrentLocation.this, LandmarkPopUpActivity.class);
+                intent.putExtra("landmarkID", ""+position);
+                startActivity(intent);
+
+            }
+        });
 
         locationClient = LocationServices.getFusedLocationProviderClient(this);
         locationCallback = new LocationCallback() {

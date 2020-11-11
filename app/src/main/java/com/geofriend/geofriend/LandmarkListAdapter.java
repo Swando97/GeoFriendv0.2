@@ -40,9 +40,6 @@ public class LandmarkListAdapter extends ArrayAdapter<LandMark> {
         textLocationName.setText(getItem(position).getName());
         textLocationDesc.setText(getItem(position).getDesc());
 
-
-
-
         return convertView;
     }
 }

@@ -48,10 +48,10 @@ public class activity_adddata extends AppCompatActivity{
         double rlong=Double.parseDouble(tlong.getText().toString());
         String rdesc=tdes.getText().toString();
 
-        LandMark l1=new LandMark(rname,rlat,rlong,rdesc);
+//        LandMark l1=new LandMark(rname,rlat,rlong,rdesc);
 
-        bridge b=new bridge();
-        b.addData(l1);
+//        bridge b=new bridge();
+//        b.addData(l1);
 
 
     }

@@ -52,6 +52,9 @@ public class bridge {
         TextView t1=findViewById(R.id.testing);
         t1.setText(b.l1.getName());
     */
+
+
+
     public void getLandMark(String s1){
 
         DocumentReference docRef = db.collection("landmark").document(s1);
@@ -69,17 +72,19 @@ public class bridge {
                 /*int id=l2.getID();
                 l1.setID(id);*/
 
-                double longitude=l2.getmLongitude();
-                l1.setmLongitude(longitude);
+//                double longitude=l2.getmLongitude();
+//                l1.setmLongitude(longitude);
 
-                double latitude=l2.getmLatitude();
-                l1.setmLatitude(latitude);
+//                double latitude=l2.getmLatitude();
+//                l1.setmLatitude(latitude);
                 LatLng l=l2.getLocation();
                 l1.setLocation(l.latitude,l.longitude);
                 
             }
         });
     }
+
+
     
     
     //searching the document name by id

@@ -95,6 +95,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if(!lma.landmarks.isEmpty()) {
             for(int i = 0; i < lma.landmarks.size(); i++) {
                 mMap.addMarker(new MarkerOptions().position(lma.landmarks.get(i).getLocation()).title(lma.landmarks.get(i).getName()));
+                //Pull markers from database and put them into the map
+
             }
         }
 

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -16,6 +17,7 @@ public class LandmarkPopUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         final TextView landmarkDesc;
+        final ImageView landmarkPic;
 
         setContentView(R.layout.activity_landmark);
 
@@ -38,13 +40,20 @@ public class LandmarkPopUpActivity extends AppCompatActivity {
         final String landmarkID = bundle.getString("landmarkID");
         //Toast.makeText(LandmarkPopUpActivity.this, "Landmark ID: "+landmarkID, Toast.LENGTH_LONG).show();
 
+
+
         landmarkDesc = findViewById(R.id.landmarkDescription);
+        landmarkPic = findViewById(R.id.landmarkPic);
 
         landmarkDesc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                landmarkDesc.setText(lma.landmarks.get(Integer.parseInt(landmarkID)).getDesc());
+//                landmarkDesc.setText(lma.landmarks.get(Integer.parseInt(landmarkID)).getDesc());
+                landmarkDesc.setText("Butts");
+
             }
         });
+
+        //landmarkPic.setImageResource(lma.landmarks.get(Integer.parseInt(landmarkID)).getImage());
     }
 }

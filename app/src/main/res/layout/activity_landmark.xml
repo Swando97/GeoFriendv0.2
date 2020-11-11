@@ -7,7 +7,7 @@
     android:background="@drawable/gradient">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/landmarkPic"
         android:layout_width="174dp"
         android:layout_height="164dp"
         android:layout_marginTop="36dp"
@@ -29,5 +29,5 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/landmarkPic" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,6 +11,8 @@ public class LandmarkMapAdapter {
 
     }
 
+
+    //Put these into database and be able to access them
     public void loadLandmarks(){
         landmarks.add(0, new LandMark(1, "Juniper Park", 50.66107816, -120.2600196, "A park in Juniper Ridge.",R.drawable.image5));
         landmarks.add(1, new LandMark(2, "Juniper Dog Park", 50.66165625, -120.26141435, "A dog park in Juniper Ridge.",R.drawable.image5));
