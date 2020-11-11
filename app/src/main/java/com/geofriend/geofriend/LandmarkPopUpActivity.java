@@ -49,6 +49,7 @@ public class LandmarkPopUpActivity extends AppCompatActivity {
 
 //        landmarkDesc.setText("Butts");
         landmarkDesc.setText(lma.landmarks.get(Integer.parseInt(landmarkID)).getDesc());
+        landmarkPic.setImageResource(lma.landmarks.get(Integer.parseInt(landmarkID)).getImage());
 
         landmarkDesc.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +62,6 @@ public class LandmarkPopUpActivity extends AppCompatActivity {
             }
         });
 
-        //landmarkPic.setImageResource(lma.landmarks.get(Integer.parseInt(landmarkID)).getImage());
+        //
     }
 }
