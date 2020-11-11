@@ -54,9 +54,9 @@ public class CurrentLocation extends AppCompatActivity {
 
         geofencingClient = LocationServices.getGeofencingClient(this);
 
-        addressResultReceiver = new LocationAddressResultReceiver(new Handler());
+       /* addressResultReceiver = new LocationAddressResultReceiver(new Handler());
         textView = findViewById(R.id.currentLocationTxt);
-        gpsText = findViewById(R.id.coordinates);
+        gpsText = findViewById(R.id.coordinates);*/
         listViewLocationDisplay = findViewById(R.id.listViewLocations);
         //geofencingClient = LocationServices.getGeofencingClient(this);
 
@@ -81,7 +81,7 @@ public class CurrentLocation extends AppCompatActivity {
             }
         });
 
-        locationClient = LocationServices.getFusedLocationProviderClient(this);
+        /*locationClient = LocationServices.getFusedLocationProviderClient(this);
         locationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(LocationResult locationResult) {
@@ -89,10 +89,10 @@ public class CurrentLocation extends AppCompatActivity {
                 getAddress();
             }
         };
-        startLocationUpdates();
+        startLocationUpdates();*/
     }
 
-    @SuppressWarnings("MissingPermission")
+    /*@SuppressWarnings("MissingPermission")
     private void startLocationUpdates() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED) {
@@ -119,7 +119,7 @@ public class CurrentLocation extends AppCompatActivity {
         intent.putExtra("add_receiver", addressResultReceiver);
         intent.putExtra("add_location", currentLocation);
         startService(intent);
-    }
+    }*/
 
     /*@Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull
@@ -134,7 +134,7 @@ public class CurrentLocation extends AppCompatActivity {
         }
     }*/
 
-    private class LocationAddressResultReceiver extends ResultReceiver implements com.geofriend.geofriend.LocationAddressResultReceiver {
+    /*private class LocationAddressResultReceiver extends ResultReceiver implements com.geofriend.geofriend.LocationAddressResultReceiver {
         LocationAddressResultReceiver(Handler handler) {
             super(handler);
         }
@@ -155,12 +155,12 @@ public class CurrentLocation extends AppCompatActivity {
         private void showResults(String currentAdd) {
             textView.setText(currentAdd);
         }
-    }
+    }*/
 
     @Override
     protected void onResume() {
         super.onResume();
-        startLocationUpdates();
+        /*startLocationUpdates();
 
         btn = findViewById(R.id.getLocationBtn);
 
@@ -187,7 +187,7 @@ public class CurrentLocation extends AppCompatActivity {
                     }
                 }
             }
-        });
+        });*/
 
         // Initializing OnClick Listener for button to display User Current Location
         userLocationBttn = findViewById(R.id.UserCurrentLocationDetailsBttn);
@@ -205,6 +205,6 @@ public class CurrentLocation extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        locationClient.removeLocationUpdates(locationCallback);
+        //locationClient.removeLocationUpdates(locationCallback);
     }
 }
