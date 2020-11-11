@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,8 +37,9 @@ public class LandmarkPopUpActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         getWindow().setAttributes(mLayoutParams);
 
-        Bundle bundle = getIntent().getExtras();
-        final String landmarkID = bundle.getString("landmarkID");
+        final Bundle mapBundle = getIntent().getExtras();
+
+        final String landmarkID = mapBundle.getString("landmarkID");
         //Toast.makeText(LandmarkPopUpActivity.this, "Landmark ID: "+landmarkID, Toast.LENGTH_LONG).show();
 
 
@@ -45,15 +47,21 @@ public class LandmarkPopUpActivity extends AppCompatActivity {
         landmarkDesc = findViewById(R.id.landmarkDescription);
         landmarkPic = findViewById(R.id.landmarkPic);
 
+//        landmarkDesc.setText("Butts");
+        landmarkDesc.setText(lma.landmarks.get(Integer.parseInt(landmarkID)).getDesc());
+        landmarkPic.setImageResource(lma.landmarks.get(Integer.parseInt(landmarkID)).getImage());
+
         landmarkDesc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                landmarkDesc.setText(lma.landmarks.get(Integer.parseInt(landmarkID)).getDesc());
-                landmarkDesc.setText("Butts");
+
+                Toast.makeText(LandmarkPopUpActivity.this, "Landmark ID: "+ landmarkID, Toast.LENGTH_LONG).show();
+//
+//
 
             }
         });
 
-        //landmarkPic.setImageResource(lma.landmarks.get(Integer.parseInt(landmarkID)).getImage());
+        //
     }
 }
