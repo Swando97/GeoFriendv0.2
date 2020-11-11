@@ -44,11 +44,11 @@ public class CurrentLocation extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(CurrentLocation.this, LandmarkPopUpActivity.class);
-                intent.putExtra("landmarkKey", ""+position);
+                intent.putExtra("landmarkID", ""+position);
 
                 Toast.makeText(CurrentLocation.this, ""+position, Toast.LENGTH_LONG).show();
 
-                //startActivity(intent);
+                startActivity(intent);
             }
         });
     }
