@@ -16,45 +16,25 @@
         <ImageView
             android:id="@+id/icon"
             style="@style/ThemeOverlay.FirebaseIcon"
-            android:layout_width="98dp"
-            android:layout_height="122dp"
+            android:layout_width="107dp"
+            android:layout_height="146dp"
             android:contentDescription="@string/desc_firebase_lockup"
             android:src="@drawable/logo" />
 
         <ListView
             android:id="@+id/listViewLocations"
             android:layout_width="wrap_content"
-            android:layout_height="153dp"
+            android:layout_height="286dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/currentLocationTxt"
-            android:layout_width="match_parent"
-            android:layout_height="119dp"
-            android:text="@string/location"
-            android:textAlignment="center" />
-
-        <TextView
-            android:id="@+id/coordinates"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/gps_location" />
-
         <Button
-            android:id="@+id/getLocationBtn"
+            android:id="@+id/UserCurrentLocationDetailsBttn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/get_coordinates" />
-
-        <Button
-            android:id="@+id/addDataPage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="addDataPage"
-            android:text="GoToAdddata" />
+            android:text="@string/current_location_bttn_txt" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

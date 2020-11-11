@@ -74,10 +74,13 @@
     <string name="get_location">Get Location</string>
     <string name="geofence">Geofence</string>
     <string name="title_activity_google_maps">Map</string>
-    <string name="get_coordinates">Get Coordinates</string>
+    <string name="get_coordinates">GPS Coordinates</string>
     <string name="gps_location">GPS Location:</string>
     <string name="button">Button</string>
     <string name="name">Name:</string>
     <string name="longtiude">Longtiude:</string>
+    <string name="loading_current_location">Loading Current Location...</string>
+    <string name="show_exact_gps_coordinates">Show Exact GPS Coordinates:</string>
+    <string name="current_location_bttn_txt">Current Location</string>
 
 </resources>
