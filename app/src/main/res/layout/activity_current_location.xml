@@ -24,7 +24,7 @@
         <ListView
             android:id="@+id/listViewLocations"
             android:layout_width="wrap_content"
-            android:layout_height="153dp"
+            android:layout_height="81dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,11 +50,10 @@
             android:text="@string/get_coordinates" />
 
         <Button
-            android:id="@+id/addDataPage"
+            android:id="@+id/UserCurrentLocationDetailsBttn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="addDataPage"
-            android:text="GoToAdddata" />
+            android:text="@string/current_location_bttn_txt" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

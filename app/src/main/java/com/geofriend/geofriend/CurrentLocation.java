@@ -33,7 +33,7 @@ import java.util.ArrayList;
 
 public class CurrentLocation extends AppCompatActivity {
 
-    private Button btn;
+    private Button btn, userLocationBttn;
     private TextView textView, gpsText;
     private FusedLocationProviderClient locationClient;
     private final int REQUEST_PERMISSION_LOCATION = 2;
@@ -185,6 +185,18 @@ public class CurrentLocation extends AppCompatActivity {
                 }
             }
         });
+
+        // Initializing OnClick Listener for button to display User Current Location
+        userLocationBttn = findViewById(R.id.UserCurrentLocationDetailsBttn);
+
+        userLocationBttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent currentLocationIntent = new Intent(getApplicationContext(), getUserLocationDetails.class);
+                startActivity(currentLocationIntent);
+            }
+        });
+
     }
 
     @Override

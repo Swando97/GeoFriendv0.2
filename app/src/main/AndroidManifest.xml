@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.geofriend.geofriend">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the "MyLocation" functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <!--
-        The INTERNET/ACCESS_FINE_LOCATION permissions are required to get users current location.
-   -->
+    <!--         The INTERNET/ACCESS_FINE_LOCATION permissions are required to get users current location. -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
     <!--
          The ACCESS_BACKGROUND_LOCATION permissions An app requires background location access
          if a feature within the app constantly shares location with other users or uses the Geofencing API.
@@ -28,6 +24,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".getUserLocationDetails"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -45,22 +42,15 @@
 
         <activity
             android:name=".CurrentLocation"
-            android:screenOrientation="portrait">
-        </activity>
-        
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".LandmarkPopUpActivity"
-            android:theme="@style/AppTheme.LandmarkTheme"
-            android:screenOrientation="portrait">
-        </activity>
-
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.LandmarkTheme"></activity>
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"
-            android:screenOrientation="portrait"
-            />
-
-
+            android:screenOrientation="portrait" />
         <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait">
@@ -73,7 +63,7 @@
 
         <service android:name=".GetAddressIntentService" />
 
-        <activity android:name=".activity_adddata"></activity>
+        <activity android:name=".activity_adddata" />
     </application>
 
 </manifest>
