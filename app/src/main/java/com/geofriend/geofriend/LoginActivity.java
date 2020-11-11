@@ -48,7 +48,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mBinding.emailCreateAccountButton.setOnClickListener(this);
         mBinding.signOutButton.setOnClickListener(this);
         mBinding.exploreButton.setOnClickListener(this);
-        mBinding.reloadButton.setOnClickListener(this);
         mBinding.geofenceButton.setOnClickListener(this);
 
     }
@@ -264,8 +263,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } else if (i == R.id.exploreButton) {
             Intent toExplore = new Intent(LoginActivity.this, MapsActivity.class);
             startActivity(toExplore);
-        } else if (i == R.id.reloadButton) {
-            reload();
         } else if (i == R.id.geofenceButton){
             Intent toGeofence = new Intent (this, CurrentLocation.class);
             startActivity(toGeofence);
