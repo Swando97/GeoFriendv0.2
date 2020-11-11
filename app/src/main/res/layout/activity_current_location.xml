@@ -21,10 +21,19 @@
             android:contentDescription="@string/desc_firebase_lockup"
             android:src="@drawable/logo" />
 
+        <ListView
+            android:id="@+id/listViewLocations"
+            android:layout_width="wrap_content"
+            android:layout_height="153dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/currentLocationTxt"
             android:layout_width="match_parent"
-            android:layout_height="179dp"
+            android:layout_height="119dp"
             android:text="@string/location"
             android:textAlignment="center" />
 
@@ -39,15 +48,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/get_coordinates" />
-
-        <ListView
-            android:id="@+id/listViewLocations"
-            android:layout_width="wrap_content"
-            android:layout_height="112dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/addDataPage"
