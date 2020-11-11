@@ -83,12 +83,22 @@ public class getUserLocationDetails extends AppCompatActivity {
         intent.putExtra("add_location", currentLocation);
         startService(intent);
     }
-
+    /*@Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull
+            int[] grantResults) {
+        if (requestCode == REQUEST_PERMISSION_LOCATION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                startLocationUpdates();
+            } else {
+                Toast.makeText(this, "Location permission not granted, " + "restart the app if you want the feature",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+    }*/
     private class LocationAddressResultReceiver extends ResultReceiver implements com.geofriend.geofriend.LocationAddressResultReceiver {
         LocationAddressResultReceiver(Handler handler) {
             super(handler);
         }
-
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             if (resultCode == 0) {
@@ -101,7 +111,6 @@ public class getUserLocationDetails extends AppCompatActivity {
             String currentAdd = resultData.getString("address_result");
             showResults(currentAdd);
         }
-
         private void showResults(String currentAdd) {
             userLocation.setText(currentAdd);
         }
