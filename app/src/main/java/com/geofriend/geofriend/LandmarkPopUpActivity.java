@@ -43,7 +43,7 @@ public class LandmarkPopUpActivity extends AppCompatActivity {
         //Toast.makeText(LandmarkPopUpActivity.this, "Landmark ID: "+landmarkID, Toast.LENGTH_LONG).show();
 
 
-
+        //Instantiating Landmark Description and Image
         landmarkDesc = findViewById(R.id.landmarkDescription);
         landmarkPic = findViewById(R.id.landmarkPic);
 
@@ -51,17 +51,5 @@ public class LandmarkPopUpActivity extends AppCompatActivity {
         landmarkDesc.setText(lma.landmarks.get(Integer.parseInt(landmarkID)).getDesc());
         landmarkPic.setImageResource(lma.landmarks.get(Integer.parseInt(landmarkID)).getImage());
 
-        landmarkDesc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Toast.makeText(LandmarkPopUpActivity.this, "Landmark ID: "+ landmarkID, Toast.LENGTH_LONG).show();
-//
-//
-
-            }
-        });
-
-        //
     }
 }

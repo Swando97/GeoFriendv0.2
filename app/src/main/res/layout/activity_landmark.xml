@@ -11,6 +11,7 @@
         android:layout_width="174dp"
         android:layout_height="164dp"
         android:layout_marginTop="36dp"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
