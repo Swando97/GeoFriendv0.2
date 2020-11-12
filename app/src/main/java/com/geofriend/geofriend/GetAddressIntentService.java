@@ -48,7 +48,7 @@ public class GetAddressIntentService extends IntentService {
             String addressDetails = address.getFeatureName() + "\n" + address.getThoroughfare() + "\n" +
                     "Locality: " + address.getLocality() + "\n" + "County: " + address.getSubAdminArea() + "\n" +
                     "State: " + address.getAdminArea() + "\n" + "Country: " + address.getCountryName() + "\n" +
-                    "Postal Code: " + address.getPostalCode() + "\n";
+                    "Postal Code: " + address.getPostalCode();
             sendResultsToReceiver(2, addressDetails);
         }
     }

@@ -19,6 +19,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
+
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -36,6 +38,8 @@ public class getUserLocationDetails extends AppCompatActivity {
     private Location currentLocation;
     private LocationCallback locationCallback;
 
+    // For GPS decimal precision
+    DecimalFormat precision = new DecimalFormat("0.000");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,8 +139,7 @@ public class getUserLocationDetails extends AppCompatActivity {
                                     Double lat = location.getLatitude();
                                     Double longt = location.getLongitude();
 
-                                    gpsTxt.setText(lat + " ," + longt);
-                                    Toast.makeText(getUserLocationDetails.this, "Success", Toast.LENGTH_LONG);
+                                    gpsTxt.setText("GPS Coordinates: " + precision.format(lat) + " ," + precision.format(longt));
                                 }
                             }
                         });
