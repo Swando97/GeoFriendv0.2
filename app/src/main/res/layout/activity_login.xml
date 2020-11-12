@@ -150,22 +150,21 @@
 
             <ImageButton
                 android:id="@+id/exploreButton"
-                android:layout_width="16dp"
+                android:layout_width="14dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="#00FFFFFF"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/explore_button" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/geofenceButton"
-                android:layout_width="0dp"
-                android:layout_height="104dp"
-                android:layout_marginStart="@dimen/button_horizontal_margin"
-                android:layout_marginEnd="@dimen/button_horizontal_margin"
+                android:layout_width="14dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/geofence"
-                android:theme="@style/ThemeOverlay.MyDarkButton" />
+                android:backgroundTint="#00FFFFFF"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/landmarks_button" />
 
         </LinearLayout>
     </RelativeLayout>
