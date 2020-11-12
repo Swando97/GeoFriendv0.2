@@ -4,45 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".getUserLocationDetails">
+    tools:context=".getUserLocationDetails"
+    android:background="@drawable/geofriendbackground">
 
-    <ImageView
-        android:id="@+id/icon"
-        style="@style/ThemeOverlay.FirebaseIcon"
-        android:layout_width="118dp"
-        android:layout_height="134dp"
-        android:contentDescription="@string/desc_firebase_lockup"
-        android:src="@drawable/logo"
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="242dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toTopOf="@+id/UserLocationDetails"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.59" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/UserLocationDetails"
-        android:layout_width="324dp"
-        android:layout_height="287dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/loading_current_location"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.442" />
 
     <TextView
         android:id="@+id/GPSCoordinates"
-        android:layout_width="293dp"
-        android:layout_height="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/show_exact_gps_coordinates"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.364"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.756" />
+        app:layout_constraintTop_toBottomOf="@+id/UserLocationDetails"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/getGPSCoordinates"
@@ -54,5 +53,6 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/GPSCoordinates"
-        app:layout_constraintVertical_bias="0.19" />
+        app:layout_constraintVertical_bias="0.041" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
