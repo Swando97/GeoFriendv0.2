@@ -1,32 +1,56 @@
 package com.geofriend.geofriend;
 
 import android.Manifest;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.Geofence;
+import com.google.android.gms.location.GeofencingClient;
+import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.maps.model.Marker;
+
+
+
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+    private static final String TAG = "MapActivity";
+    private float GEOFENCE_RADIUS = 200;
+    private String GEOFENCE_ID = "someID0";
+    Geofence geofence;
+    private final int BACKGROUND_LOCATION_ACCESS_REQUEST_CODE = 10002;
+    private GeofencingClient geofencingClient;
+    private GeofenceHelper geofenceHelper;
 
     private GoogleMap mMap;
     LandmarkMapAdapter lma = new LandmarkMapAdapter();
@@ -71,6 +95,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         };
         // ----- This is used to display current location information -----
+
+        //create geofencing client
+        geofencingClient = LocationServices.getGeofencingClient(this);
+        geofenceHelper = new GeofenceHelper(this);
+        geofencingClient = LocationServices.getGeofencingClient(this);
+
+
+
     }
 
     /**
@@ -86,16 +118,38 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
 //         ----- Check the location permission status -----
 //         Example: If not already granted, request for location permission
-//        startLocationUpdates();
+       startLocationUpdates();
 
         mMap = googleMap;
-
+        mMap.clear();
+        startLocationUpdates();
+        enableUserLocation();
         final String landmarkID = "";
 
         if(!lma.landmarks.isEmpty()) {
             for(int i = 0; i < lma.landmarks.size(); i++) {
                 mMap.addMarker(new MarkerOptions().position(lma.landmarks.get(i).getLocation()).title(lma.landmarks.get(i).getName()));
                 //Pull markers from database and put them into the map
+                addCircle(lma.landmarks.get(i).getLocation(), GEOFENCE_RADIUS);
+
+
+                //LatLng latLng = new LatLng(37.42, -122.084);
+                if (Build.VERSION.SDK_INT >= 29) {
+                    //We need background permission
+                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                        addGeofence(lma.landmarks.get(i).getLocation(), GEOFENCE_RADIUS, lma.landmarks.get(i).getName());
+                    } else {
+                        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
+                            //We show a dialog and ask for permission
+                            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION}, BACKGROUND_LOCATION_ACCESS_REQUEST_CODE);
+                        } else {
+                            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION}, BACKGROUND_LOCATION_ACCESS_REQUEST_CODE);
+                        }
+                    }
+
+                } else {
+                    addGeofence(lma.landmarks.get(i).getLocation(), GEOFENCE_RADIUS, lma.landmarks.get(i).getName());
+                }
 
             }
         }
@@ -186,5 +240,67 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onPause() {
         super.onPause();
         locationClient.removeLocationUpdates(locationCallback);
+    }
+
+
+
+    private void addCircle(LatLng latLng, float radius) {
+        CircleOptions circleOptions = new CircleOptions();
+        circleOptions.center(latLng);
+        circleOptions.radius(radius);
+        circleOptions.strokeColor(Color.argb(255, 255, 0, 0));
+        circleOptions.fillColor(Color.argb(30, 255, 0, 0));
+        circleOptions.strokeWidth(4);
+        mMap.addCircle(circleOptions);
+    }
+
+
+    private void addGeofence(LatLng latLng, float radius, String id) {
+
+        geofence = geofenceHelper.getGeofence(id, latLng, radius, Geofence.GEOFENCE_TRANSITION_ENTER|Geofence.GEOFENCE_TRANSITION_EXIT|Geofence.GEOFENCE_TRANSITION_DWELL);
+        GeofencingRequest geofencingRequest = geofenceHelper.getGeofencingRequest(geofence);
+        Intent intent = new Intent(this, GeofenceBoardCastReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getService(
+                this, 2046, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            //
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            geofencingClient.addGeofences(geofencingRequest, pendingIntent)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d(TAG, "onSuccess: Geofence Added...");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            String errorMessage = geofenceHelper.getErrorString(e);
+                            Log.d(TAG, "onFailure: " + errorMessage);
+                        }
+                    });
+            return;
+        }
+
+    }
+
+    private void enableUserLocation() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            mMap.setMyLocationEnabled(true);
+        } else {
+            //Ask for permission
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+                //We need to show user a dialog for displaying why the permission is needed and then ask for the permission...
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_PERMISSION_LOCATION);
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_PERMISSION_LOCATION);
+            }
+        }
     }
 }
