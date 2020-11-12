@@ -24,13 +24,14 @@ public class CurrentLocation extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_location);
 
         geofencingClient = LocationServices.getGeofencingClient(this);
 
+        //ListView instantiation
         listViewLocationDisplay = findViewById(R.id.listViewLocations);
-        //geofencingClient = LocationServices.getGeofencingClient(this);
 
         // Array List for LandMark Locations and Adapter Instantiation
         lma.loadLandmarks();
@@ -46,12 +47,17 @@ public class CurrentLocation extends AppCompatActivity {
                 Intent intent = new Intent(CurrentLocation.this, LandmarkPopUpActivity.class);
                 intent.putExtra("landmarkID", ""+position);
 
-                Toast.makeText(CurrentLocation.this, ""+position, Toast.LENGTH_LONG).show();
+                //Toast.makeText(CurrentLocation.this, ""+position, Toast.LENGTH_LONG).show();
 
+                //Load the PopUpActivity Window
                 startActivity(intent);
             }
         });
+
     }
+
+
+
     @Override
     protected void onResume() {
         super.onResume();

@@ -41,10 +41,6 @@
         android:text="Desc"
         android:maxLength="50"
         android:singleLine="true"
-
-
-
-
         />
 
 </RelativeLayout>

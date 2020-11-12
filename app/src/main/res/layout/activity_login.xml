@@ -70,7 +70,8 @@
             android:layout_height="72dp"
             android:orientation="horizontal"
             android:paddingLeft="16dp"
-            android:paddingRight="16dp">
+            android:paddingRight="16dp"
+            android:visibility="gone">
 
             <EditText
                 android:id="@+id/fieldEmail"
@@ -101,7 +102,8 @@
             android:layout_below="@+id/emailPasswordFields"
             android:orientation="horizontal"
             android:paddingLeft="16dp"
-            android:paddingRight="16dp">
+            android:paddingRight="16dp"
+            android:visibility="gone">
 
             <Button
                 android:id="@+id/emailSignInButton"
@@ -129,54 +131,44 @@
         <LinearLayout
             android:id="@+id/signedInButtons"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_height="104dp"
+            android:layout_centerHorizontal="true"
             android:orientation="horizontal"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <Button
                 android:id="@+id/signOutButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="104dp"
                 android:layout_marginStart="@dimen/button_horizontal_margin"
                 android:layout_marginEnd="@dimen/button_horizontal_margin"
                 android:layout_weight="1"
                 android:text="@string/sign_out"
                 android:theme="@style/ThemeOverlay.MyDarkButton" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/exploreButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/button_horizontal_margin"
-                android:layout_marginEnd="@dimen/button_horizontal_margin"
+                android:layout_width="16dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/explore"
-                android:theme="@style/ThemeOverlay.MyDarkButton" />
+                android:backgroundTint="#00FFFFFF"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/explore_button" />
 
             <Button
                 android:id="@+id/geofenceButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="104dp"
                 android:layout_marginStart="@dimen/button_horizontal_margin"
                 android:layout_marginEnd="@dimen/button_horizontal_margin"
                 android:layout_weight="1"
                 android:text="@string/geofence"
                 android:theme="@style/ThemeOverlay.MyDarkButton" />
 
-            <Button
-                android:id="@+id/reloadButton"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/button_horizontal_margin"
-                android:layout_marginEnd="@dimen/button_horizontal_margin"
-                android:layout_weight="1"
-                android:text="@string/reload"
-                android:theme="@style/ThemeOverlay.MyDarkButton" />
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>
+
 </layout>
