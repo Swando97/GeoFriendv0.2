@@ -81,7 +81,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
         //Loads landmarks into the adapter instance
-        lma.loadLandmarks();
+        if (lma.landmarks.isEmpty()){
+            lma.loadLandmarks();
+        }
 
 //        userLocation = findViewById(R.id.landMarkTxt);
 

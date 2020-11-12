@@ -34,7 +34,10 @@ public class CurrentLocation extends AppCompatActivity {
         listViewLocationDisplay = findViewById(R.id.listViewLocations);
 
         // Array List for LandMark Locations and Adapter Instantiation
-        lma.loadLandmarks();
+        if (lma.landmarks.isEmpty()){
+            lma.loadLandmarks();
+        }
+
         lla = new LandmarkListAdapter(this, R.layout.list_row, lma.landmarks);
 
         // Populate ListView
