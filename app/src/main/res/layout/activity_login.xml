@@ -135,15 +135,14 @@
             android:paddingRight="16dp"
             android:visibility="visible">
 
-            <Button
+            <ImageButton
                 android:id="@+id/signOutButton"
-                android:layout_width="0dp"
-                android:layout_height="104dp"
-                android:layout_marginStart="@dimen/button_horizontal_margin"
-                android:layout_marginEnd="@dimen/button_horizontal_margin"
+                android:layout_width="14dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/sign_out"
-                android:theme="@style/ThemeOverlay.MyDarkButton" />
+                android:backgroundTint="#00FFFFFF"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/signout_button" />
 
             <ImageButton
                 android:id="@+id/exploreButton"
