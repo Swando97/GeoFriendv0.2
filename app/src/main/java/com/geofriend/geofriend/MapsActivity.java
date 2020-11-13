@@ -45,7 +45,7 @@ import com.google.android.gms.maps.model.Marker;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
     private static final String TAG = "MapActivity";
-    private float GEOFENCE_RADIUS = 35;
+    private float GEOFENCE_RADIUS = 50;
     private String GEOFENCE_ID = "someID0";
     Geofence geofence;
     private final int BACKGROUND_LOCATION_ACCESS_REQUEST_CODE = 10002;
@@ -54,8 +54,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     LandmarkMapAdapter lma = new LandmarkMapAdapter();
-
-    private double mLat, mLng, cLat, cLng;
 
 
 
@@ -157,7 +155,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         //Moves camera to a park nearby my house.
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(50.66107816, -120.2600196), 17.0f));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(getUserLocationDetails.cLat, getUserLocationDetails.cLng), 17.0f));
 
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override

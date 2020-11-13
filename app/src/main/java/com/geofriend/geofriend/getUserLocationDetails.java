@@ -38,6 +38,8 @@ public class getUserLocationDetails extends AppCompatActivity {
     private Location currentLocation;
     private LocationCallback locationCallback;
 
+    static double cLat, cLng;
+
     // For GPS decimal precision
     DecimalFormat precision = new DecimalFormat("0.000");
 
@@ -136,10 +138,10 @@ public class getUserLocationDetails extends AppCompatActivity {
                             @Override
                             public void onSuccess(Location location) {
                                 if (location != null) {
-                                    Double lat = location.getLatitude();
-                                    Double longt = location.getLongitude();
+                                    cLat = location.getLatitude();
+                                    cLng = location.getLongitude();
 
-                                    gpsTxt.setText("GPS Coordinates: " + precision.format(lat) + " ," + precision.format(longt));
+                                    gpsTxt.setText("GPS Coordinates: " + precision.format(cLat) + " ," + precision.format(cLng));
                                 }
                             }
                         });
