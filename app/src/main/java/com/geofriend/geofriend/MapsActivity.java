@@ -294,9 +294,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         geofence = geofenceHelper.getGeofence(id, latLng, radius, Geofence.GEOFENCE_TRANSITION_ENTER|Geofence.GEOFENCE_TRANSITION_EXIT|Geofence.GEOFENCE_TRANSITION_DWELL);
         GeofencingRequest geofencingRequest = geofenceHelper.getGeofencingRequest(geofence);
-        Intent intent = new Intent(this, GeofenceBoardCastReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getService(
-                this, 2046, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        
+        PendingIntent pendingIntent = geofenceHelper.getPendingIntent();
 
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
