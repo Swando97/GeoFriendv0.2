@@ -45,7 +45,7 @@ public class GeofenceHelper extends ContextWrapper {
             return geoFencePendingIntent;
 
         Intent intent = new Intent( this, GeofenceBoardCastReceiver.class);
-        geoFencePendingIntent= PendingIntent.getService(
+        geoFencePendingIntent= PendingIntent.getBroadcast(
                 this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT );
         return geoFencePendingIntent;
     }
