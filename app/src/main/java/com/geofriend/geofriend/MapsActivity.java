@@ -5,9 +5,12 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.ResultReceiver;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,7 +48,7 @@ import com.google.android.gms.maps.model.Marker;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
     private static final String TAG = "MapActivity";
-    private float GEOFENCE_RADIUS = 50;
+    private float GEOFENCE_RADIUS = 92;
     private String GEOFENCE_ID = "someID0";
     Geofence geofence;
     private final int BACKGROUND_LOCATION_ACCESS_REQUEST_CODE = 10002;
@@ -55,12 +58,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     LandmarkMapAdapter lma = new LandmarkMapAdapter();
 
-
+    private double cLat, cLng;
 
     // Location variables used to request permissions
-    private Location currentLocation;
-    private FusedLocationProviderClient locationClient;
     private final int REQUEST_PERMISSION_LOCATION = 2;
+    private FusedLocationProviderClient fusedLocationClient;
+    public MapsActivity.LocationAddressResultReceiver addressResultReceiver;
+    private Location currentLocation;
     private LocationCallback locationCallback;
 
     // Location variable used to display results
@@ -86,20 +90,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        userLocation = findViewById(R.id.landMarkTxt);
 
         // ----- This is used to display current location information -----
-        locationClient = LocationServices.getFusedLocationProviderClient(this);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         locationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(LocationResult locationResult) {
                 currentLocation = locationResult.getLocations().get(0);
-                //getAddress();
+                getAddress();
             }
         };
+        startLocationUpdates();
         // ----- This is used to display current location information -----
+
+
 
         //create geofencing client
         geofencingClient = LocationServices.getGeofencingClient(this);
         geofenceHelper = new GeofenceHelper(this);
         geofencingClient = LocationServices.getGeofencingClient(this);
+
+
 
 
 
@@ -126,14 +135,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         enableUserLocation();
         final String landmarkID = "";
 
+
+        //THIS SECTION OF CODE IS RUN WHEN THE MAP OPENS UP
+        //  IT CHECKS TO SEE IF THERE'S LANDMARKS IN THE LIST, THEN LOADS THEM INTO THE MAP
         if(!lma.landmarks.isEmpty()) {
             for(int i = 0; i < lma.landmarks.size(); i++) {
+                //GETS LANDMARK AT POSITION i AND PUTS IT ONTO THE MAP
                 mMap.addMarker(new MarkerOptions().position(lma.landmarks.get(i).getLocation()).title(lma.landmarks.get(i).getName()));
-                //Pull markers from database and put them into the map
+                //A GEOFENCE IS THEN BUILT AROUND THE LANDMARK
                 addCircle(lma.landmarks.get(i).getLocation(), GEOFENCE_RADIUS);
 
 
-                //LatLng latLng = new LatLng(37.42, -122.084);
                 if (Build.VERSION.SDK_INT >= 29) {
                     //We need background permission
                     if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -150,34 +162,52 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 } else {
                     addGeofence(lma.landmarks.get(i).getLocation(), GEOFENCE_RADIUS, lma.landmarks.get(i).getName());
                 }
+            } // END OF LOOP
+        } // END OF IF STATEMENT
 
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (getApplicationContext().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                //get the Location here
+                fusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        if (location != null) {
+                            cLat = location.getLatitude();
+                            cLng = location.getLongitude();
+
+                            //Toast.makeText(MapsActivity.this, cLat+", "+cLng, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            } else {
+                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_PERMISSION_LOCATION);
             }
         }
 
+
         //Moves camera to a park nearby my house.
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(getUserLocationDetails.cLat, getUserLocationDetails.cLng), 17.0f));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(50.66107816, -120.2600196), 17.0f));
+
+
+        //SETS AN ON CLICK LISTENER FOR THE MARKERS
 
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-
-//                mLat = la.landmarks.get(Integer.parseInt(marker.getId().substring(1))).getLocation().latitude;
-//                mLng = la.landmarks.get(Integer.parseInt(marker.getId().substring(1))).getLocation().longitude;
-
-
-
-
-                    int markerClick = Log.v("click", "Markerclick");
+                    // WHEN MARKER IS CLICKED, THE MARKER ID IS PASSED THROUGH AN INTENT TO LandmarkPopUpActivity.class
+                    // THEN THE ACTIVITY IS OPENED
+                    //int markerClick = Log.v("click", "Markerclick");
                     Intent intent = new Intent(MapsActivity.this, LandmarkPopUpActivity.class);
                     intent.putExtra("landmarkID", marker.getId().substring(1));
                     startActivity(intent);
                     return false;
-
-
             }
         });
 
-    }
+    } // END OF onMapReady Method
+
+
 
     // Permission to access users current location
     private void startLocationUpdates() {
@@ -191,27 +221,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             locationRequest.setInterval(2000);
             locationRequest.setFastestInterval(1000);
             locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-            locationClient.requestLocationUpdates(locationRequest, locationCallback, null);
+            fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
         }
     }
 
-    /*private void getAddress() {
+
+
+    private void getAddress() {
         if (!Geocoder.isPresent()) {
             Toast.makeText(MapsActivity.this, "Can't find current address, ",
                     Toast.LENGTH_SHORT).show();
             return;
         }
-        Intent intent = new Intent(this,GetAddressIntentService.class);
+        Intent intent = new Intent(this, GetAddressIntentService.class);
         intent.putExtra("add_receiver", addressResultReceiver);
         intent.putExtra("add_location", currentLocation);
         startService(intent);
-    } */
+    }
 
-    /*private class LocationAddressResultReceiverTest extends ResultReceiver implements com.geofriend.geofriend.LocationAddressResultReceiver {
-        LocationAddressResultReceiverTest(Handler handler) {
+
+
+    private class LocationAddressResultReceiver extends ResultReceiver implements com.geofriend.geofriend.LocationAddressResultReceiver {
+        LocationAddressResultReceiver(Handler handler) {
             super(handler);
         }
-
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             if (resultCode == 0) {
@@ -224,11 +257,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             String currentAdd = resultData.getString("address_result");
             showResults(currentAdd);
         }
-
         private void showResults(String currentAdd) {
             userLocation.setText(currentAdd);
         }
-    }*/
+    }
+
+
 
     @Override
     protected void onResume() {
@@ -239,7 +273,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onPause() {
         super.onPause();
-        locationClient.removeLocationUpdates(locationCallback);
+        fusedLocationClient.removeLocationUpdates(locationCallback);
     }
 
 
@@ -253,6 +287,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         circleOptions.strokeWidth(4);
         mMap.addCircle(circleOptions);
     }
+
 
 
     private void addGeofence(LatLng latLng, float radius, String id) {

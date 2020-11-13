@@ -62,6 +62,7 @@ public class getUserLocationDetails extends AppCompatActivity {
         };
         startLocationUpdates();
     }
+
     @SuppressWarnings("MissingPermission")
     private void startLocationUpdates() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
@@ -77,6 +78,7 @@ public class getUserLocationDetails extends AppCompatActivity {
             fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
         }
     }
+
     @SuppressWarnings("MissingPermission")
     private void getAddress() {
         if (!Geocoder.isPresent()) {
@@ -141,7 +143,8 @@ public class getUserLocationDetails extends AppCompatActivity {
                                     cLat = location.getLatitude();
                                     cLng = location.getLongitude();
 
-                                    gpsTxt.setText("GPS Coordinates: " + precision.format(cLat) + " ," + precision.format(cLng));
+                                    Toast.makeText(getUserLocationDetails.this, cLat+", "+cLng, Toast.LENGTH_SHORT).show();
+//                                    gpsTxt.setText("GPS Coordinates: " + precision.format(cLat) + " ," + precision.format(cLng));
                                 }
                             }
                         });
