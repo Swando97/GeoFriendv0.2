@@ -21,6 +21,7 @@ public class LandmarkMapAdapter {
         landmarks.add(4, new LandMark(5, "Kamloops Downtown", 52.675940, -124.360050, "Testing... description", R.drawable.image2));
         landmarks.add(5, new LandMark(6, "TRU HOL", 48.675940, -118.360050, "Testing ...", R.drawable.image1));
         landmarks.add(6, new LandMark(7, "Google", 37.422, -122.084, "Testing ...", R.drawable.image1));
+        landmarks.add(7, new LandMark(8, "Juniper Terrace Sign", 50.661299864433, -120.26571575592384, "Juniper Terrace sign on Qu'Appelle Blvd.",R.drawable.image6));
     }
 
 

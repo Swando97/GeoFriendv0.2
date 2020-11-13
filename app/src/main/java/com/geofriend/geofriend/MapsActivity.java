@@ -45,7 +45,7 @@ import com.google.android.gms.maps.model.Marker;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
     private static final String TAG = "MapActivity";
-    private float GEOFENCE_RADIUS = 200;
+    private float GEOFENCE_RADIUS = 35;
     private String GEOFENCE_ID = "someID0";
     Geofence geofence;
     private final int BACKGROUND_LOCATION_ACCESS_REQUEST_CODE = 10002;
