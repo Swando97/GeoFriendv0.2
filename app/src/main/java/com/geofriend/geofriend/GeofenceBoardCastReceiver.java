@@ -14,20 +14,17 @@ import java.util.List;
 
 public class GeofenceBoardCastReceiver extends BroadcastReceiver {
 
-    private static final String TAG = "GeofenceBroadcastReceiv";
+    private static final String TAG = "GeofenceBroadcastReceiver";
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        // This method is called when the BroadcastReceiver is receiving
-        // an Intent broadcast.
-//        Toast.makeText(context, "Geofence triggered...", Toast.LENGTH_SHORT).show();
 
         NoticationHelper notificationHelper = new NoticationHelper(context);
 
         GeofencingEvent geofencingEvent = GeofencingEvent.fromIntent(intent);
 
         if (geofencingEvent.hasError()) {
-            Log.d(TAG, "onReceive: Error receiving geofence event...");
+            Log.d(TAG, "Error receiving geofence event...");
             return;
         }
 
