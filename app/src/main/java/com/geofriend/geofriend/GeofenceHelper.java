@@ -6,6 +6,8 @@ import android.content.ContextWrapper;
 import android.content.Intent;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofenceStatusCodes;
@@ -24,19 +26,21 @@ public class GeofenceHelper extends ContextWrapper {
 
     public GeofencingRequest getGeofencingRequest(Geofence geofence) {
         return new GeofencingRequest.Builder()
-                .setInitialTrigger( GeofencingRequest.INITIAL_TRIGGER_ENTER )
+                .setInitialTrigger(Geofence.GEOFENCE_TRANSITION_ENTER|Geofence.GEOFENCE_TRANSITION_DWELL|Geofence.GEOFENCE_TRANSITION_EXIT )
                 .addGeofence( geofence )
                 .build();
     }
 
+    @NonNull
     public Geofence getGeofence(String ID, LatLng latLng, float radius, int transitionTypes) {
-        return new Geofence.Builder()
-                .setCircularRegion(latLng.latitude, latLng.longitude, radius)
+           return new Geofence.Builder()
                 .setRequestId(ID)
-                .setTransitionTypes(transitionTypes)
-                .setLoiteringDelay(5000)
                 .setExpirationDuration(Geofence.NEVER_EXPIRE)
+                .setCircularRegion(latLng.latitude, latLng.longitude, radius)
+                .setNotificationResponsiveness(1000)
+                .setTransitionTypes(transitionTypes)
                 .build();
+
     }
 
     public PendingIntent getPendingIntent() {

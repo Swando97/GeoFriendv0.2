@@ -43,14 +43,11 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.maps.model.Marker;
 
 
-
-
-
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
     private static final String TAG = "MapActivity";
     private float GEOFENCE_RADIUS = 92;
     private String GEOFENCE_ID = "someID0";
-    Geofence geofence;
+
     private final int BACKGROUND_LOCATION_ACCESS_REQUEST_CODE = 10002;
     private GeofencingClient geofencingClient;
     private GeofenceHelper geofenceHelper;
@@ -83,7 +80,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
         //Loads landmarks into the adapter instance
-        if (lma.landmarks.isEmpty()){
+        if (lma.landmarks.isEmpty()) {
             lma.loadLandmarks();
         }
 
@@ -102,14 +99,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // ----- This is used to display current location information -----
 
 
-
         //create geofencing client
         geofencingClient = LocationServices.getGeofencingClient(this);
         geofenceHelper = new GeofenceHelper(this);
-        geofencingClient = LocationServices.getGeofencingClient(this);
-
-
-
 
 
     }
@@ -127,19 +119,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
 //         ----- Check the location permission status -----
 //         Example: If not already granted, request for location permission
-       startLocationUpdates();
+
 
         mMap = googleMap;
         mMap.clear();
         startLocationUpdates();
         enableUserLocation();
-        final String landmarkID = "";
+        // final String landmarkID = "";
 
 
         //THIS SECTION OF CODE IS RUN WHEN THE MAP OPENS UP
         //  IT CHECKS TO SEE IF THERE'S LANDMARKS IN THE LIST, THEN LOADS THEM INTO THE MAP
-        if(!lma.landmarks.isEmpty()) {
-            for(int i = 0; i < lma.landmarks.size(); i++) {
+        if (!lma.landmarks.isEmpty()) {
+            for (int i = 0; i < lma.landmarks.size(); i++) {
                 //GETS LANDMARK AT POSITION i AND PUTS IT ONTO THE MAP
                 mMap.addMarker(new MarkerOptions().position(lma.landmarks.get(i).getLocation()).title(lma.landmarks.get(i).getName()));
                 //A GEOFENCE IS THEN BUILT AROUND THE LANDMARK
@@ -164,7 +156,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             } // END OF LOOP
         } // END OF IF STATEMENT
-
+        /*LatLng ln=new LatLng(50.661299864433, -120.26571575592384);
+        addGeofence(ln, GEOFENCE_RADIUS, "1");*/
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (getApplicationContext().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -195,18 +188,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                    // WHEN MARKER IS CLICKED, THE MARKER ID IS PASSED THROUGH AN INTENT TO LandmarkPopUpActivity.class
-                    // THEN THE ACTIVITY IS OPENED
-                    //int markerClick = Log.v("click", "Markerclick");
-                    Intent intent = new Intent(MapsActivity.this, LandmarkPopUpActivity.class);
-                    intent.putExtra("landmarkID", marker.getId().substring(1));
-                    startActivity(intent);
-                    return false;
+                // WHEN MARKER IS CLICKED, THE MARKER ID IS PASSED THROUGH AN INTENT TO LandmarkPopUpActivity.class
+                // THEN THE ACTIVITY IS OPENED
+                //int markerClick = Log.v("click", "Markerclick");
+                Intent intent = new Intent(MapsActivity.this, LandmarkPopUpActivity.class);
+                intent.putExtra("landmarkID", marker.getId().substring(1));
+                startActivity(intent);
+                return false;
             }
         });
 
     } // END OF onMapReady Method
-
 
 
     // Permission to access users current location
@@ -226,7 +218,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-
     private void getAddress() {
         if (!Geocoder.isPresent()) {
             Toast.makeText(MapsActivity.this, "Can't find current address, ",
@@ -240,11 +231,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-
     private class LocationAddressResultReceiver extends ResultReceiver implements com.geofriend.geofriend.LocationAddressResultReceiver {
         LocationAddressResultReceiver(Handler handler) {
             super(handler);
         }
+
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             if (resultCode == 0) {
@@ -257,11 +248,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             String currentAdd = resultData.getString("address_result");
             showResults(currentAdd);
         }
+
         private void showResults(String currentAdd) {
             userLocation.setText(currentAdd);
         }
     }
-
 
 
     @Override
@@ -277,7 +268,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-
     private void addCircle(LatLng latLng, float radius) {
         CircleOptions circleOptions = new CircleOptions();
         circleOptions.center(latLng);
@@ -289,38 +279,41 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-
     private void addGeofence(LatLng latLng, float radius, String id) {
 
-        geofence = geofenceHelper.getGeofence(id, latLng, radius, Geofence.GEOFENCE_TRANSITION_ENTER|Geofence.GEOFENCE_TRANSITION_EXIT|Geofence.GEOFENCE_TRANSITION_DWELL);
+        Geofence geofence = geofenceHelper.getGeofence(id, latLng, radius, Geofence.GEOFENCE_TRANSITION_ENTER);
         GeofencingRequest geofencingRequest = geofenceHelper.getGeofencingRequest(geofence);
-        
+
         PendingIntent pendingIntent = geofenceHelper.getPendingIntent();
 
-
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            //
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            geofencingClient.addGeofences(geofencingRequest, pendingIntent)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Log.d(TAG, "onSuccess: Geofence Added...");
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            String errorMessage = geofenceHelper.getErrorString(e);
-                            Log.d(TAG, "onFailure: " + errorMessage);
-                        }
-                    });
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+                //We need to show user a dialog for displaying why the permission is needed and then ask for the permission...
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_PERMISSION_LOCATION);
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_PERMISSION_LOCATION);
+            }
             return;
         }
+        geofencingClient.addGeofences(geofencingRequest, pendingIntent)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "onSuccess: Geofence Added...");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        String errorMessage = geofenceHelper.getErrorString(e);
+                        Log.d(TAG, "onFailure: " + errorMessage);
+                    }
+                });
+
+
+
+
+
 
     }
 
