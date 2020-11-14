@@ -12,7 +12,7 @@ import com.google.android.gms.location.GeofencingEvent;
 
 import java.util.List;
 
-public class GeofenceBoardCastReceiver extends BroadcastReceiver {
+public class GeofenceBroadcastReceiver extends BroadcastReceiver {
 
     private static final String TAG = "GeofenceBroadcastReceiver";
 

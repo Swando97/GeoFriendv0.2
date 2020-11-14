@@ -10,14 +10,18 @@
     <!--         The INTERNET/ACCESS_FINE_LOCATION permissions are required to get users current location. -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <!--
          The ACCESS_BACKGROUND_LOCATION permissions An app requires background location access
          if a feature within the app constantly shares location with other users or uses the Geofencing API.
          On Android 10 (API level 29) and higher, you must declare this explicitly!
     -->
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-
+    <!--testing
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    testing-->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -63,7 +67,7 @@
         </activity>
 
         <service android:name=".GetAddressIntentService" />
-
+        <receiver android:name=".GeofenceBroadcastReceiver"/>
         <activity android:name=".activity_adddata" />
     </application>
 

@@ -18,7 +18,7 @@ public class GeofenceHelper extends ContextWrapper {
     private static final String TAG = "GeofenceHelper";
 
     private PendingIntent geoFencePendingIntent ;
-    private final int GEOFENCE_REQ_CODE = 0;
+  //  private final int GEOFENCE_REQ_CODE = 0;
 
     public GeofenceHelper(Context base) {
         super(base);
@@ -26,7 +26,7 @@ public class GeofenceHelper extends ContextWrapper {
 
     public GeofencingRequest getGeofencingRequest(Geofence geofence) {
         return new GeofencingRequest.Builder()
-                .setInitialTrigger(Geofence.GEOFENCE_TRANSITION_ENTER|Geofence.GEOFENCE_TRANSITION_DWELL|Geofence.GEOFENCE_TRANSITION_EXIT )
+                .setInitialTrigger(Geofence.GEOFENCE_TRANSITION_ENTER/*|Geofence.GEOFENCE_TRANSITION_DWELL|Geofence.GEOFENCE_TRANSITION_EXIT */)
                 .addGeofence( geofence )
                 .build();
     }
@@ -48,7 +48,7 @@ public class GeofenceHelper extends ContextWrapper {
         if ( geoFencePendingIntent != null )
             return geoFencePendingIntent;
 
-        Intent intent = new Intent( this, GeofenceBoardCastReceiver.class);
+        Intent intent = new Intent( this, GeofenceBroadcastReceiver.class);
         geoFencePendingIntent= PendingIntent.getBroadcast(
                 this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT );
         return geoFencePendingIntent;
