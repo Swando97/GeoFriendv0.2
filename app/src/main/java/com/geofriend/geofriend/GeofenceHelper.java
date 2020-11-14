@@ -1,13 +1,10 @@
 package com.geofriend.geofriend;
 
 import android.app.PendingIntent;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.util.Log;
-
-import androidx.core.view.KeyEventDispatcher;
 
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.location.Geofence;
@@ -18,7 +15,8 @@ import com.google.android.gms.maps.model.LatLng;
 public class GeofenceHelper extends ContextWrapper {
     private static final String TAG = "GeofenceHelper";
 
-    PendingIntent geoFencePendingIntent ;
+    private PendingIntent geoFencePendingIntent ;
+    private final int GEOFENCE_REQ_CODE = 0;
 
     public GeofenceHelper(Context base) {
         super(base);
@@ -26,8 +24,8 @@ public class GeofenceHelper extends ContextWrapper {
 
     public GeofencingRequest getGeofencingRequest(Geofence geofence) {
         return new GeofencingRequest.Builder()
-                .addGeofence( geofence )
                 .setInitialTrigger( GeofencingRequest.INITIAL_TRIGGER_ENTER )
+                .addGeofence( geofence )
                 .build();
     }
 
@@ -42,17 +40,13 @@ public class GeofenceHelper extends ContextWrapper {
     }
 
     public PendingIntent getPendingIntent() {
+        Log.d(TAG, "createGeofencePendingIntent");
         if ( geoFencePendingIntent != null )
             return geoFencePendingIntent;
 
         Intent intent = new Intent( this, GeofenceBoardCastReceiver.class);
-       //code try to get background work
-        /*ComponentName componentName=new ComponentName(this,GeofenceBoardCastReceiver.class);
-        intent.setComponent(componentName);*/
-
-
         geoFencePendingIntent= PendingIntent.getBroadcast(
-                this, 2607, intent, PendingIntent.FLAG_UPDATE_CURRENT );
+                this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT );
         return geoFencePendingIntent;
     }
 
