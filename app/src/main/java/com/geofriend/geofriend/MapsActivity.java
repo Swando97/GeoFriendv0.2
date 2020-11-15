@@ -48,7 +48,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private float GEOFENCE_RADIUS = 92;
     private String GEOFENCE_ID = "someID0";
 
-    // Testing the geofence functionality. Debugging errors.
+    // Must always accept permissions!!! (Geofence Working)
 
     private final int BACKGROUND_LOCATION_ACCESS_REQUEST_CODE = 10002;
     private GeofencingClient geofencingClient;
