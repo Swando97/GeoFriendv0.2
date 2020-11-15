@@ -137,12 +137,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 //GETS LANDMARK AT POSITION i AND PUTS IT ONTO THE MAP
                 mMap.addMarker(new MarkerOptions().position(lma.landmarks.get(i).getLocation()).title(lma.landmarks.get(i).getName()));
                 //A GEOFENCE IS THEN BUILT AROUND THE LANDMARK
-                addCircle(lma.landmarks.get(i).getLocation(), GEOFENCE_RADIUS);
-
+              
 
                 if (Build.VERSION.SDK_INT >= 29) {
                     //We need background permission
                     if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                          addCircle(lma.landmarks.get(i).getLocation(), GEOFENCE_RADIUS);
+
                         addGeofence(lma.landmarks.get(i).getLocation(), GEOFENCE_RADIUS, lma.landmarks.get(i).getName());
                     } else {
                         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
@@ -154,6 +155,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }
 
                 } else {
+                    addCircle(lma.landmarks.get(i).getLocation(), GEOFENCE_RADIUS);
                     addGeofence(lma.landmarks.get(i).getLocation(), GEOFENCE_RADIUS, lma.landmarks.get(i).getName());
                 }
             } // END OF LOOP
