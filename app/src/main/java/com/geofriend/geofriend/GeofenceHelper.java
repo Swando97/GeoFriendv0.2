@@ -60,6 +60,7 @@ public class GeofenceHelper extends ContextWrapper {
             switch (apiException.getStatusCode()) {
                 case GeofenceStatusCodes
                         .GEOFENCE_NOT_AVAILABLE:
+                     Toast.makeText( GeofenceHelper.this,"Google location accuracy open required to use Geofencing \n Setting => Location => Google Location Accuracy", Toast.LENGTH_LONG).show();
                     return "GEOFENCE_NOT_AVAILABLE";
 
                 case GeofenceStatusCodes
