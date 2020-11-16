@@ -31,7 +31,7 @@ public class LandmarkPopUpActivity extends AppCompatActivity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout( (int)(width * 0.8), (int)(height*0.7) );
+        getWindow().setLayout( (int)(width * 0.8), (int)(height*0.55) );
 
         WindowManager.LayoutParams mLayoutParams = getWindow().getAttributes();
         mLayoutParams.dimAmount = 0.75f;

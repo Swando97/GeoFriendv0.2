@@ -37,8 +37,8 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
 
         switch (transitionType) {
             case Geofence.GEOFENCE_TRANSITION_ENTER:
-                Toast.makeText(context, "You have enter a landmark! ", Toast.LENGTH_SHORT).show();
-                notificationHelper.sendHighPriorityNotification("You have enter a landmark!", "", MapsActivity.class);
+                //Toast.makeText(context, "You are within distance of a landmark! Open GeoFriend to find out where you are!", Toast.LENGTH_SHORT).show();
+                notificationHelper.sendHighPriorityNotification("You are within distance of a landmark! Open GeoFriend to find out where you are!", "", MapsActivity.class);
                 break;
             case Geofence.GEOFENCE_TRANSITION_DWELL:
                 Toast.makeText(context, "GEOFENCE_TRANSITION_DWELL", Toast.LENGTH_SHORT).show();

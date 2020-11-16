@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
+import android.os.SystemClock;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -108,6 +109,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 getAddress();
 
                 //Moves camera to Current Position
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude())));
                 //mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude())));
             }
         };
@@ -144,12 +146,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         enableUserLocation();
         mUI = mMap.getUiSettings();
 
-        //mUI.setScrollGesturesEnabled(false);
-        //mUI.setCompassEnabled(false);
-        //mUI.setScrollGesturesEnabledDuringRotateOrZoom(false);
+        mUI.setScrollGesturesEnabled(false);
+        mUI.setCompassEnabled(false);
+        mUI.setScrollGesturesEnabledDuringRotateOrZoom(false);
         mUI.setZoomControlsEnabled(false);
-        //mUI.setMyLocationButtonEnabled(false);
+        mUI.setMyLocationButtonEnabled(false);
 
+
+        // Import map style
         try {
             // Customise the styling of the base map using a JSON object defined
             // in a raw resource file.
@@ -230,14 +234,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
-            public boolean onMarkerClick(Marker marker) {
+            public boolean onMarkerClick(final Marker marker) {
                 // WHEN MARKER IS CLICKED, THE MARKER ID IS PASSED THROUGH AN INTENT TO LandmarkPopUpActivity.class
                 // THEN THE ACTIVITY IS OPENED
                 //int markerClick = Log.v("click", "Markerclick");
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(lma.landmarks.get(Integer.parseInt(marker.getId().substring(1))).getLocation().latitude, lma.landmarks.get(Integer.parseInt(marker.getId().substring(1))).getLocation().longitude)));
+
                 Intent intent = new Intent(MapsActivity.this, LandmarkPopUpActivity.class);
                 intent.putExtra("landmarkID", marker.getId().substring(1));
                 startActivity(intent);
-                return false;
+
+                return true;
             }
         });
 
@@ -293,7 +300,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         private void showResults(String currentAdd) {
-            Log.d("onReceive", "Current Address:\n"+currentAdd);
+            //Log.d("onReceive", "Current Address:\n"+currentAdd);
         }
     }
 
