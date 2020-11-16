@@ -17,6 +17,7 @@ public class LandmarkPopUpActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        final TextView landmarkName;
         final TextView landmarkDesc;
         final ImageView landmarkPic;
 
@@ -30,7 +31,7 @@ public class LandmarkPopUpActivity extends AppCompatActivity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout( (int)(width * 0.8), (int)(height*0.6) );
+        getWindow().setLayout( (int)(width * 0.8), (int)(height*0.7) );
 
         WindowManager.LayoutParams mLayoutParams = getWindow().getAttributes();
         mLayoutParams.dimAmount = 0.75f;
@@ -44,10 +45,12 @@ public class LandmarkPopUpActivity extends AppCompatActivity {
 
 
         //Instantiating Landmark Description and Image
+        landmarkName = findViewById(R.id.landmarkName);
         landmarkDesc = findViewById(R.id.landmarkDescription);
         landmarkPic = findViewById(R.id.landmarkPic);
 
 //        landmarkDesc.setText("Butts");
+        landmarkName.setText(lma.landmarks.get(Integer.parseInt(landmarkID)).getName());
         landmarkDesc.setText(lma.landmarks.get(Integer.parseInt(landmarkID)).getDesc());
         landmarkPic.setImageResource(lma.landmarks.get(Integer.parseInt(landmarkID)).getImage());
 

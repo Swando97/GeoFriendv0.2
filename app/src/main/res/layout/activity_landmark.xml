@@ -8,27 +8,44 @@
 
     <ImageView
         android:id="@+id/landmarkPic"
-        android:layout_width="174dp"
-        android:layout_height="164dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_marginTop="104dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo" />
 
     <TextView
         android:id="@+id/landmarkDescription"
-        android:layout_width="290dp"
-        android:layout_height="89dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="269dp"
+        android:layout_height="311dp"
+        android:layout_marginTop="40dp"
         android:fontFamily="@font/aldrich"
         android:text="Click me to learn about this landmark!"
         android:textAlignment="center"
         android:textColor="#100F0F"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/landmarkPic" />
+
+    <TextView
+        android:id="@+id/landmarkName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/aldrich"
+        android:text="Landmark Name"
+        android:textAlignment="center"
+        android:textColor="#100F0F"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/landmarkPic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
