@@ -23,6 +23,7 @@
         android:layout_width="269dp"
         android:layout_height="311dp"
         android:layout_marginTop="40dp"
+        android:background="#00FFFFFF"
         android:fontFamily="@font/aldrich"
         android:text="Click me to learn about this landmark!"
         android:textAlignment="center"
