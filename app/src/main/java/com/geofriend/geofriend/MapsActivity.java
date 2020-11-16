@@ -189,7 +189,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .target(new LatLng(50.6725100459571,-120.3652719974587))
                 .zoom(17.0f)
                 .bearing(0)
-                .tilt(45)
+                .tilt(30)
                 .build();
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(position));
 
