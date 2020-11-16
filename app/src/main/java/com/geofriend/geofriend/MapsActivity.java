@@ -145,11 +145,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mUI = mMap.getUiSettings();
 
-        mUI.setScrollGesturesEnabled(false);
-        mUI.setCompassEnabled(false);
-        mUI.setScrollGesturesEnabledDuringRotateOrZoom(false);
+        //mUI.setScrollGesturesEnabled(false);
+        //mUI.setCompassEnabled(false);
+        //mUI.setScrollGesturesEnabledDuringRotateOrZoom(false);
         mUI.setZoomControlsEnabled(false);
-        mUI.setMyLocationButtonEnabled(false);
+        //mUI.setMyLocationButtonEnabled(false);
 
 
         //THIS SECTION OF CODE IS RUN WHEN THE MAP OPENS UP
