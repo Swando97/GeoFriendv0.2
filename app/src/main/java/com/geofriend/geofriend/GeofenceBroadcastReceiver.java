@@ -37,7 +37,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
 
         switch (transitionType) {
             case Geofence.GEOFENCE_TRANSITION_ENTER:
-                Toast.makeText(context, "GEOFENCE_TRANSITION_ENTER: "+geofenceList.get(0).getRequestId(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "GEOFENCE_TRANSITION_ENTER: ", Toast.LENGTH_SHORT).show();
                 notificationHelper.sendHighPriorityNotification("GEOFENCE_TRANSITION_ENTER", "", MapsActivity.class);
                 break;
             case Geofence.GEOFENCE_TRANSITION_DWELL:
