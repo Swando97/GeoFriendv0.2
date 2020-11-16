@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.location.Geocoder;
 import android.location.Location;
@@ -39,6 +40,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -140,9 +142,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.clear();
         startLocationUpdates();
         enableUserLocation();
-        // final String landmarkID = "";
-
-
         mUI = mMap.getUiSettings();
 
         //mUI.setScrollGesturesEnabled(false);
@@ -150,6 +149,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //mUI.setScrollGesturesEnabledDuringRotateOrZoom(false);
         mUI.setZoomControlsEnabled(false);
         //mUI.setMyLocationButtonEnabled(false);
+
+        try {
+            // Customise the styling of the base map using a JSON object defined
+            // in a raw resource file.
+            boolean success = googleMap.setMapStyle(
+                    MapStyleOptions.loadRawResourceStyle(
+                            this, R.raw.style_json));
+
+            if (!success) {
+                Log.e(TAG, "Style parsing failed.");
+            }
+        } catch (Resources.NotFoundException e) {
+            Log.e(TAG, "Can't find style. Error: ", e);
+        }
+
 
 
         //THIS SECTION OF CODE IS RUN WHEN THE MAP OPENS UP
