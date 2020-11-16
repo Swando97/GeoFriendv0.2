@@ -27,10 +27,13 @@ import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingClient;
 import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.CircleOptions;
@@ -58,6 +61,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GeofenceHelper geofenceHelper;
 
     private GoogleMap mMap;
+    private UiSettings mUI;
     LandmarkMapAdapter lma = new LandmarkMapAdapter();
 
     private double cLat, cLng;
@@ -100,10 +104,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onLocationResult(LocationResult locationResult) {
                 currentLocation = locationResult.getLocations().get(0);
                 getAddress();
+
+                //Moves camera to Current Position
+                //mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude())));
             }
         };
         startLocationUpdates();
-        // ----- This is used to display current location information -----
+
+        // ----- Enables Map Options -----
 
 
         //create geofencing client
@@ -133,6 +141,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         startLocationUpdates();
         enableUserLocation();
         // final String landmarkID = "";
+
+
+        mUI = mMap.getUiSettings();
+
+        mUI.setScrollGesturesEnabled(false);
+        mUI.setCompassEnabled(false);
+        mUI.setScrollGesturesEnabledDuringRotateOrZoom(false);
+        mUI.setZoomControlsEnabled(false);
+        mUI.setMyLocationButtonEnabled(false);
 
 
         //THIS SECTION OF CODE IS RUN WHEN THE MAP OPENS UP
@@ -165,8 +182,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             } // END OF LOOP
         } // END OF IF STATEMENT
-        /*LatLng ln=new LatLng(50.661299864433, -120.26571575592384);
-        addGeofence(ln, GEOFENCE_RADIUS, "1");*/
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (getApplicationContext().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -188,17 +203,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         //Moves camera to TRU.
+
         CameraPosition position = new CameraPosition.Builder()
                 .target(new LatLng(50.6725100459571,-120.3652719974587))
-                .zoom(17.0f)
-                .bearing(0)
+                .zoom(18.5f)
+                .bearing(315)
                 .tilt(60)
                 .build();
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(position));
-
-        //TRU BOUNDS
-        //LatLngBounds truBounds = new LatLngBounds(new LatLng(50.66987861588667,-120.37135093093347),new LatLng(50.67176661716066,-120.3610471722601));
-        //mMap.setLatLngBoundsForCameraTarget(truBounds);
 
         //SETS AN ON CLICK LISTENER FOR THE MARKERS
 
@@ -289,8 +301,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         CircleOptions circleOptions = new CircleOptions();
         circleOptions.center(latLng);
         circleOptions.radius(radius);
-        circleOptions.strokeColor(Color.argb(255, 255, 0, 0));
-        circleOptions.fillColor(Color.argb(30, 255, 0, 0));
+        circleOptions.strokeColor(Color.argb(255, 14, 229, 237));
+        circleOptions.fillColor(Color.argb(30, 14, 229, 237));
         circleOptions.strokeWidth(4);
         mMap.addCircle(circleOptions);
     }
@@ -326,11 +338,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         Log.d(TAG, "onFailure: " + errorMessage);
                     }
                 });
-
-
-
-
-
 
     }
 

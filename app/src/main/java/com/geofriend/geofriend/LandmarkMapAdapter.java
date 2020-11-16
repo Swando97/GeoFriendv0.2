@@ -26,9 +26,9 @@ public class LandmarkMapAdapter {
         landmarks.add(6, new LandMark(7, "TRU Residence and Conference Centre",50.673744200166574, -120.36742125670973, "Thompson Rivers University on-campus residence and conference centre.",R.drawable.tru_res));
         landmarks.add(7, new LandMark(8, "Student Union",50.67306511025329,-120.3659860168475, "Thompson Rivers University Student Union Building.",R.drawable.stu_union));
         landmarks.add(8, new LandMark(9, "Arts & Education",50.67308843269605,-120.3647585945219, "Where you will find 90% of the Arts Faculty offices and where many arts classes are taught.",R.drawable.tru_ae));
-        landmarks.add(9, new LandMark(10, "Horticulture",50.67308843269605,-120.3647585945219, "Thompson Rivers University Horticulture building and greenhouses.",R.drawable.tru_hortic_building));
-        landmarks.add(10, new LandMark(11, "STaR Centre",50.67314879661173,-120.36748619968999, "???.",R.drawable.tru_star));
-        landmarks.add(11, new LandMark(12, "Radio CFBX",50.672911456223126,-120.36739744428374, "Building where the CFBX 92.5 The X radio shows are done.",R.drawable.tru_radio));
+        landmarks.add(9, new LandMark(10, "Horticulture",50.673219010247934,-120.3675127020705, "Thompson Rivers University Horticulture building and greenhouses.",R.drawable.tru_hortic_building));
+        landmarks.add(10, new LandMark(11, "STaR Centre",50.67291549862759,-120.36737384617643, "???.",R.drawable.tru_star));
+        landmarks.add(11, new LandMark(12, "Radio CFBX",50.672729365684205,-120.36724375903921, "Building where the CFBX 92.5 The X radio shows are done.",R.drawable.tru_radio));
         landmarks.add(12, new LandMark(13, "Campus Activity Centre",50.67271252838339,-120.3660271474017, "Home to many facilities such as the TRU Student Union, the Bookstore, The Den, and many more!",R.drawable.tru_cac));
         landmarks.add(13, new LandMark(14, "Grand Hall",50.67276265802898,-120.3664196997232, "The main conference centre hall in the Campus Activity Centre.",R.drawable.tru_grandhall));
         landmarks.add(14, new LandMark(15, "TRU Bookstore",50.67251908739977,-120.36635402706865, "The TRU Bookstore is your place to get TRU textbooks, gear, and supplies.",R.drawable.tru_bookstore));
