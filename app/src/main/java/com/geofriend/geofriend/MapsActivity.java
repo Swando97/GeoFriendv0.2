@@ -31,8 +31,10 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -45,7 +47,7 @@ import com.google.android.gms.maps.model.Marker;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
     private static final String TAG = "MapActivity";
-    private float GEOFENCE_RADIUS = 92;
+    private float GEOFENCE_RADIUS = 20;
     private String GEOFENCE_ID = "someID0";
 
     // Must always accept permissions!!! (Geofence Working)
@@ -180,10 +182,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }
 
+        //Moves camera to TRU.
+        CameraPosition position = new CameraPosition.Builder()
+                .target(new LatLng(50.6725100459571,-120.3652719974587))
+                .zoom(17.0f)
+                .bearing(0)
+                .tilt(45)
+                .build();
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(position));
 
-        //Moves camera to a park nearby my house.
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(50.66107816, -120.2600196), 17.0f));
-
+        //TRU BOUNDS
+        //LatLngBounds truBounds = new LatLngBounds(new LatLng(50.66987861588667,-120.37135093093347),new LatLng(50.67176661716066,-120.3610471722601));
+        //mMap.setLatLngBoundsForCameraTarget(truBounds);
 
         //SETS AN ON CLICK LISTENER FOR THE MARKERS
 
