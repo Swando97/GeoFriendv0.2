@@ -31,6 +31,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
@@ -64,7 +65,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     // Location variables used to request permissions
     private final int REQUEST_PERMISSION_LOCATION = 2;
     private FusedLocationProviderClient fusedLocationClient;
-    public MapsActivity.LocationAddressResultReceiver addressResultReceiver;
+    public LocationAddressResultReceiver addressResultReceiver;
     private Location currentLocation;
     private LocationCallback locationCallback;
 
@@ -89,6 +90,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
 //        userLocation = findViewById(R.id.landMarkTxt);
+
+        addressResultReceiver = new LocationAddressResultReceiver(new Handler());
 
         // ----- This is used to display current location information -----
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -137,7 +140,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (!lma.landmarks.isEmpty()) {
             for (int i = 0; i < lma.landmarks.size(); i++) {
                 //GETS LANDMARK AT POSITION i AND PUTS IT ONTO THE MAP
-                mMap.addMarker(new MarkerOptions().position(lma.landmarks.get(i).getLocation()).title(lma.landmarks.get(i).getName()));
+                mMap.addMarker(new MarkerOptions().position(lma.landmarks.get(i).getLocation()).title(lma.landmarks.get(i).getName()).icon(BitmapDescriptorFactory.fromResource(R.drawable.landmark)));
                 //A GEOFENCE IS THEN BUILT AROUND THE LANDMARK
               
 
@@ -189,7 +192,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .target(new LatLng(50.6725100459571,-120.3652719974587))
                 .zoom(17.0f)
                 .bearing(0)
-                .tilt(30)
+                .tilt(60)
                 .build();
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(position));
 
@@ -264,7 +267,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         private void showResults(String currentAdd) {
-            userLocation.setText(currentAdd);
+            Log.d("onReceive", "Current Address:\n"+currentAdd);
         }
     }
 
