@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:weightSum="4"
     android:alpha="0.90"
-    android:background="@drawable/geofriendbackground">
+    android:background="@drawable/bluegradient">
 
     <ProgressBar
         android:id="@+id/progressBar"

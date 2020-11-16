@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:alpha="0.90"
-    android:background="@drawable/geofriendbackground"
+    android:background="@drawable/bluegradient"
     tools:context=".getUserLocationDetails">
 
     <Space
