@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class LandmarkPopUpActivity extends AppCompatActivity {
 
@@ -23,6 +24,8 @@ public class LandmarkPopUpActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_landmark);
 
+
+
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
@@ -31,12 +34,14 @@ public class LandmarkPopUpActivity extends AppCompatActivity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout( (int)(width * 0.8), (int)(height*0.55) );
+        getWindow().setLayout( (int)(width * 0.8), (int)(height*0.65) );
 
         WindowManager.LayoutParams mLayoutParams = getWindow().getAttributes();
         mLayoutParams.dimAmount = 0.75f;
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         getWindow().setAttributes(mLayoutParams);
+
+
 
         final Bundle mapBundle = getIntent().getExtras();
 

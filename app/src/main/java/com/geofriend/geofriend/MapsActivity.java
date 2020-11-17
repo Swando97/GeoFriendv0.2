@@ -109,7 +109,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 getAddress();
 
                 //Moves camera to Current Position
-                mMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude())));
+                //mMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude())));
                 //mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude())));
             }
         };
@@ -146,9 +146,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         enableUserLocation();
         mUI = mMap.getUiSettings();
 
-        mUI.setScrollGesturesEnabled(false);
+        //mUI.setScrollGesturesEnabled(false);
         mUI.setCompassEnabled(false);
-        mUI.setScrollGesturesEnabledDuringRotateOrZoom(false);
+        //mUI.setScrollGesturesEnabledDuringRotateOrZoom(false);
         mUI.setZoomControlsEnabled(false);
         mUI.setMyLocationButtonEnabled(false);
 

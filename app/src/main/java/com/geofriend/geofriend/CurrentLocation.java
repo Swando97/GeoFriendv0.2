@@ -62,8 +62,9 @@ public class CurrentLocation extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         // Initializing OnClick Listener for button to display User Current Location
-        userLocationBttn = findViewById(R.id.UserCurrentLocationDetailsBttn);
+        //userLocationBttn = findViewById(R.id.UserCurrentLocationDetailsBttn);
 
+        /*
         userLocationBttn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +72,7 @@ public class CurrentLocation extends AppCompatActivity {
                 startActivity(currentLocationIntent);
             }
         });
-
+        */
     }
     @Override
     protected void onPause() {
