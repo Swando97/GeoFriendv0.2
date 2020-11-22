@@ -18,9 +18,15 @@ public class LandMark {
     private String mDesc;
 
     private int mImage;
+
+    private boolean isVisited;
     //GLOBALS
 
-    public LandMark(int mID, String mName, double mLatitude, double mLongitude, String mDesc, int mImage) {
+    public LandMark() {
+
+    }
+
+    public LandMark(int mID, String mName, double mLatitude, double mLongitude, String mDesc, int mImage, boolean isVisited) {
 
         // ID and NAME
         this.mID = mID;
@@ -37,15 +43,12 @@ public class LandMark {
         // LANDMARK IMAGE
         this.mImage = mImage;
 
+        // BOOLEAN VISITED FLAG
+        this.isVisited = isVisited;
+
     }
 
-    //copy constructor using in modify landmark
-//    public LandMark(LandMark old) {
-//        mName = old.getName();
-//        mLocation = old.getLocation();
-//        mDesc = old.getDesc();
-//        mID = old.getID();
-//    }
+
 
 
 
@@ -89,46 +92,12 @@ public class LandMark {
         this.mImage = mImage;
     }
 
-
-    //Working on Database
-
-    //search LandMark by code in Database then assign the data in the object
-    public void searchByID(int ID){
-
+    public boolean isVisited(){
+        return isVisited;
     }
 
-    //search LandMark by code in Database then assign the data in the object
-    public void searchByLocation(LatLng searchLocation){
-
+    public void setVisited(boolean isVisited){
+        this.isVisited = isVisited;
     }
-
-    //search LandMark by Name in Database then assign the data in the object
-    public void searchByName(String name){
-
-    }
-
-    //remove from database
-    public void removeLandMark(){
-
-    }
-
-    //add this object to database(use as create new object)
-    public void addLandMark(){
-
-    }
-
-/*
-    //update object to database(use as modify exist object)
-    public void updateLandMark(int mID, String mName, double mLatitude, double mLongitude, String mDesc){
-        LandMark old = new LandMark(mID, mName, mLatitude, mLatitude, mDesc);
-        setName(mName);
-        setDesc(mDesc);
-        setLocation(mLocation.latitude, mLocation.longitude);
-        setID(mID);
-
-        //replace the old object with the new object in database
-
-    }
-*/
 
 }

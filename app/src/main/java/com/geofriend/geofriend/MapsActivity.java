@@ -67,6 +67,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private UiSettings mUI;
     LandmarkMapAdapter lma = new LandmarkMapAdapter();
 
+    DatabaseConnection databaseConnection = new DatabaseConnection();
+
     private double cLat, cLng;
 
     // Location variables used to request permissions
@@ -94,6 +96,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //Loads landmarks into the adapter instance
         if (lma.landmarks.isEmpty()) {
             lma.loadLandmarks();
+        }
+        if (lma.ulandmarks.isEmpty()) {
+            lma.LoadUserLandmarks();
         }
 
 //        userLocation = findViewById(R.id.landMarkTxt);
@@ -151,6 +156,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //mUI.setScrollGesturesEnabledDuringRotateOrZoom(false);
         mUI.setZoomControlsEnabled(false);
         mUI.setMyLocationButtonEnabled(false);
+
+        mMap.setMinZoomPreference(12.0f);
 
 
         // Import map style
@@ -309,14 +316,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onResume() {
         super.onResume();
         startLocationUpdates();
+        //databaseConnection.readUserData(databaseConnection.getUserID());
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         fusedLocationClient.removeLocationUpdates(locationCallback);
+        //databaseConnection.updateUserData(databaseConnection.getUserID());
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        databaseConnection.updateUserData(databaseConnection.getUserID());
+    }
 
     private void addCircle(LatLng latLng, float radius) {
         CircleOptions circleOptions = new CircleOptions();

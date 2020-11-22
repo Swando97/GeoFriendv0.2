@@ -37,8 +37,11 @@ public class CurrentLocation extends AppCompatActivity {
         if (lma.landmarks.isEmpty()){
             lma.loadLandmarks();
         }
+        if (lma.ulandmarks.isEmpty()){
+            lma.LoadUserLandmarks();
+        }
 
-        lla = new LandmarkListAdapter(this, R.layout.list_row, lma.landmarks);
+        lla = new LandmarkListAdapter(this, R.layout.list_row, lma.ulandmarks);
 
         // Populate ListView
         listViewLocationDisplay.setAdapter(lla);
@@ -64,15 +67,7 @@ public class CurrentLocation extends AppCompatActivity {
         // Initializing OnClick Listener for button to display User Current Location
         //userLocationBttn = findViewById(R.id.UserCurrentLocationDetailsBttn);
 
-        /*
-        userLocationBttn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent currentLocationIntent = new Intent(getApplicationContext(), getUserLocationDetails.class);
-                startActivity(currentLocationIntent);
-            }
-        });
-        */
+
     }
     @Override
     protected void onPause() {

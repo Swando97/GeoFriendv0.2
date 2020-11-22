@@ -2,53 +2,70 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/rounded_corners">
+    android:background="@drawable/rounded_corners"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/landmarkName"
+        android:layout_width="402dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="44dp"
+        android:fontFamily="@font/aldrich"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="Landmark Name"
+        android:textAlignment="center"
+        android:textColor="#100F0F"
+        android:textSize="27sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/landmarkPic"
         android:layout_width="128dp"
         android:layout_height="128dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="24dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/landmarkName"
         app:srcCompat="@drawable/logo" />
 
     <TextView
         android:id="@+id/landmarkDescription"
-        android:layout_width="269dp"
-        android:layout_height="311dp"
-        android:layout_marginTop="40dp"
-        android:background="#00FFFFFF"
+        android:layout_width="275dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="28dp"
         android:fontFamily="@font/aldrich"
+        android:scrollbars="vertical"
         android:text="Click me to learn about this landmark!"
         android:textAlignment="center"
         android:textColor="#100F0F"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/landmarkPic" />
 
-    <TextView
-        android:id="@+id/landmarkName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/aldrich"
-        android:text="Landmark Name"
+    <Button
+        android:id="@+id/visit_button"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:paddingTop="10dp"
+        android:text="Visit"
         android:textAlignment="center"
-        android:textColor="#100F0F"
-        android:textSize="27sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/landmarkPic"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.628" />
+        app:layout_constraintTop_toBottomOf="@+id/landmarkDescription"
+        app:layout_constraintVertical_bias="0.064" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,12 @@
 package com.geofriend.geofriend;
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.text.method.ScrollingMovementMethod;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,6 +17,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class LandmarkPopUpActivity extends AppCompatActivity {
 
+    DatabaseConnection databaseConnection = new DatabaseConnection();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +26,7 @@ public class LandmarkPopUpActivity extends AppCompatActivity {
         final TextView landmarkName;
         final TextView landmarkDesc;
         final ImageView landmarkPic;
+        final Button visitButton;
 
         setContentView(R.layout.activity_landmark);
 
@@ -51,13 +57,35 @@ public class LandmarkPopUpActivity extends AppCompatActivity {
 
         //Instantiating Landmark Description and Image
         landmarkName = findViewById(R.id.landmarkName);
+
         landmarkDesc = findViewById(R.id.landmarkDescription);
+        landmarkDesc.setMovementMethod(new ScrollingMovementMethod());
+
         landmarkPic = findViewById(R.id.landmarkPic);
+        visitButton = (Button) findViewById(R.id.visit_button);
 
 //        landmarkDesc.setText("Butts");
-        landmarkName.setText(lma.landmarks.get(Integer.parseInt(landmarkID)).getName());
-        landmarkDesc.setText(lma.landmarks.get(Integer.parseInt(landmarkID)).getDesc());
-        landmarkPic.setImageResource(lma.landmarks.get(Integer.parseInt(landmarkID)).getImage());
+        landmarkName.setText(lma.ulandmarks.get(Integer.parseInt(landmarkID)).getName());
+        landmarkDesc.setText(lma.ulandmarks.get(Integer.parseInt(landmarkID)).getDesc());
+        landmarkPic.setImageResource(lma.ulandmarks.get(Integer.parseInt(landmarkID)).getImage());
+
+        visitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(lma.ulandmarks.get(Integer.parseInt(landmarkID)).isVisited() == false) {
+                    Toast.makeText(LandmarkPopUpActivity.this, "Visited Landmark: " + landmarkID, Toast.LENGTH_LONG).show();
+                    lma.ulandmarks.set(Integer.parseInt(landmarkID), lma.landmarks.get(Integer.parseInt(landmarkID)));
+
+                    landmarkName.setText(lma.ulandmarks.get(Integer.parseInt(landmarkID)).getName());
+                    landmarkDesc.setText(lma.ulandmarks.get(Integer.parseInt(landmarkID)).getDesc());
+
+                    databaseConnection.updateUserData(databaseConnection.getUserID());
+                }
+                else{
+                    Toast.makeText(LandmarkPopUpActivity.this, "Landmark " + landmarkID + " has already been visited.", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
     }
 }

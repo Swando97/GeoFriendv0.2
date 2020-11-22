@@ -10,15 +10,25 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.geofriend.geofriend.databinding.ActivityLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -31,6 +41,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private String email;
     private String password;
+
+    LandmarkMapAdapter lma = new LandmarkMapAdapter();
+    DatabaseConnection databaseConnection = new DatabaseConnection();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +62,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mBinding.signOutButton.setOnClickListener(this);
         mBinding.exploreButton.setOnClickListener(this);
         mBinding.geofenceButton.setOnClickListener(this);
-
     }
 
     @Override
@@ -127,16 +139,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             // [START_EXCLUDE]
                             // Re-enable button
                             mBinding.exploreButton.setEnabled(true);
-
                             if (task.isSuccessful()) {
-
                                 Toast.makeText(LoginActivity.this, "Verification email sent to " + user.getEmail(), Toast.LENGTH_SHORT).show();
-
                             } else {
-
                                 Log.e("TAG", "sendEmailVerification", task.getException());
                                 Toast.makeText(LoginActivity.this, "Failed to send verification email.", Toast.LENGTH_SHORT).show();
-
                             }
                         }
                     });
@@ -204,6 +211,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                             //Toast.makeText(LoginActivity.this, "Authentication Successful. Signed in.", Toast.LENGTH_LONG).show();
 
+                            databaseConnection.readUserData(databaseConnection.getUserID());
+
                             updateUI(mAuth.getCurrentUser());
 
                         } else {
@@ -223,28 +232,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // [END sign_in_with_email]
     }
 
+
+
     private void signOut() {
+        databaseConnection.updateUserData(databaseConnection.getUserID());
         mAuth.signOut();
         updateUI(null);
-    }
 
-    private void reload() {
-        mAuth.getCurrentUser().reload().addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    updateUI(mAuth.getCurrentUser());
-                    Toast.makeText(LoginActivity.this,
-                            "Reload successful!",
-                            Toast.LENGTH_LONG).show();
-                } else {
-                    Log.e("TAG", "reload", task.getException());
-                    Toast.makeText(LoginActivity.this,
-                            "Failed to reload user.",
-                            Toast.LENGTH_LONG).show();
-                }
-            }
-        });
     }
 
     @Override
