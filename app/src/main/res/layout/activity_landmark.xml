@@ -10,8 +10,8 @@
 
     <TextView
         android:id="@+id/landmarkName"
-        android:layout_width="402dp"
-        android:layout_height="45dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
         android:fontFamily="@font/aldrich"
         android:paddingLeft="10dp"
@@ -40,8 +40,8 @@
 
     <TextView
         android:id="@+id/landmarkDescription"
-        android:layout_width="275dp"
-        android:layout_height="51dp"
+        android:layout_width="263dp"
+        android:layout_height="72dp"
         android:layout_marginTop="28dp"
         android:fontFamily="@font/aldrich"
         android:scrollbars="vertical"

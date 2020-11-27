@@ -1,6 +1,8 @@
 package com.geofriend.geofriend;
 
+import android.provider.ContactsContract;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -13,6 +15,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.lang.reflect.Array;
@@ -28,6 +31,10 @@ public class DatabaseConnection {
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+    public static List<LandMark> userLandmarks;
+    public static List<LandMark> mapLandmarks;
+    public static List<LandMark> discoveredLandmarks = new ArrayList<>();
+
 
 
     public void updateUserData(String userID){
@@ -35,9 +42,13 @@ public class DatabaseConnection {
         userID = getUserID();
 
         DocumentReference documentReference = db.collection("users").document(userID);
+        //DocumentReference documentReference = db.collection("users").document("master");
         Map<String, Object> user = new HashMap<>();
-        user.put("uID", userID);
-        user.put("userLandmarks", lma.ulandmarks);
+
+
+        user.put("landmarks", LandmarkMapAdapter.userLandmarks);
+
+
         documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
@@ -71,29 +82,59 @@ public class DatabaseConnection {
                     DocumentSnapshot document = task.getResult();
                     if(document.exists()) {
 
-                        List<Map<String, Object>> userLandmarks = (List<Map<String, Object>>) document.get("userLandmarks");
+                        //CONTAINS LIST OF LandMark objects
 
-                        //List<LandMark> ulandmarks = document.toObject(LandmarkDocument.class).landmarks;
-                        Log.v("DatabaseRead", "Successfully read from the database: "+userLandmarks.toString());
+                        DatabaseConnection.discoveredLandmarks = document.toObject(LandmarkDocument.class).landmarks;
+
+                        //DISPLAYS CONTENT OF ARRAY
+                        for(int i=0; i<discoveredLandmarks.size();i++){
+                            Log.v("DatabaseRead", "Read: "+DatabaseConnection.discoveredLandmarks.get(i).getID());
+                        }
 
                     }
+                    if(!document.exists()){
+                        Log.v("DatabaseRead","Read Failure.");
+                    }
+
                 }
             }
         });
-
     }
 
+    public void readLandmarkData(){
 
+        CollectionReference usersRef = db.collection("users");
+        DocumentReference usersIdRef = usersRef.document("master");
+        usersIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if(document.exists()) {
 
+                        //CONTAINS LIST OF MAPS
+                        DatabaseConnection.mapLandmarks = document.toObject(LandmarkDocument.class).landmarks;
+
+                        //DISPLAYS CONTENT OF ARRAY
+                        for(int i=0; i<mapLandmarks.size();i++){
+                            Log.v("DatabaseRead", "Read: "+DatabaseConnection.mapLandmarks.get(i).getName());
+                        }
+
+                        Log.v("DatabaseRead", "Database read successful.");
+
+                    }
+                    if(!document.exists()){
+                        Log.v("DatabaseRead","Read Failure.");
+                    }
+
+                }
+            }
+        });
+    }
 
     public String getUserID(){
         return mAuth.getCurrentUser().getUid();
     }
-
-
-
-
-
 
 }
 

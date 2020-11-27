@@ -16,27 +16,37 @@ import java.util.Map;
 public class LandmarkMapAdapter {
 
     public static ArrayList<LandMark> landmarks = new ArrayList<LandMark>();
-    public static ArrayList<LandMark> ulandmarks = new ArrayList<LandMark>();
+    public static ArrayList<LandMark> userLandmarks = new ArrayList<LandMark>();
 
     public LandmarkMapAdapter(){
 
     }
 
+    //Pulls Landmarks from Database
 
-    //Put these into database and be able to access them
-    public void loadLandmarks(){
+    public static void loadLandmarks(){
+        for(int i=0; i<DatabaseConnection.mapLandmarks.size();i++){
+            landmarks.add(i, DatabaseConnection.mapLandmarks.get(i));
+        }
+        landmarks.add(54, new LandMark(55, "GeoFence Test",50.660610,-120.265970, "House",R.drawable.stu_union, true));
+    }
 
-        // TEST LANDMARKS
+    public static void loadDiscoveredLandmarks(){
+        for(int i=0; i<DatabaseConnection.discoveredLandmarks.size();i++){
+            userLandmarks.add(i, DatabaseConnection.discoveredLandmarks.get(i));
+        }
+    }
 
+
+    /*
+    //Puts Landmarks into a local list
+    public static void loadLandmarks(){
         landmarks.add(0, new LandMark(1, "Juniper Park", 50.66107816, -120.2600196, "A park in Juniper Ridge where neighbourhood locals go to play hockey, tennis, or have fun on the playground with friends.",R.drawable.juniper_park, true));
         landmarks.add(1, new LandMark(2, "Juniper Dog Park", 50.66165625, -120.26141435, "A dog park in Juniper Ridge that was built to replace a Baseball Diamond. You will often find many neighbourhood locals here playing with their dogs.",R.drawable.juniper_park_dog, true));
         landmarks.add(2, new LandMark(3, "Juniper Roundabout", 50.661075, -120.262175, "A roundabout in Juniper Ridge that was built to replace a 3-Way-Stop. Nobody knows how to use the roundabout but there's been significantly fewer accidents since installation.",R.drawable.juniper_round, true));
-        landmarks.add(3, new LandMark(4, "My House", 50.66047354404017,-120.26587107479637, "Built in 1995 with an unfinished basement, it has been finally finished 25 years later. Has a lot of pine trees in the yard.", R.drawable.juniper_1649_cwd, true));
+        landmarks.add(3, new LandMark(4, "Juniper Bike Ranch", 50.66242375251574,-120.26137835992478, "The Juniper Ridge Bike Ranch is well known to many around the interior as a great place for people of all ages and skill levels to enjoy themselves.", R.drawable.juniper_bike_ranch, true));
         landmarks.add(4, new LandMark(5, "Juniper Market", 50.66148690676339,-120.26273020803993, "A corner store in Juniper Ridge on the corner of Highland and Qu'Appelle. Currently the only place in Juniper to buy anything.", R.drawable.juniper_market, true));
         landmarks.add(5, new LandMark(6, "Juniper Terrace Sign", 50.661299864433, -120.26571575592384, "Juniper Terrace sign on Qu'Appelle Blvd.",R.drawable.juniper_terrace, true));
-
-        //TRU LANDMARKS
-
         landmarks.add(6, new LandMark(7, "TRU Residence and Conference Centre",50.673744200166574, -120.36742125670973, "Thompson Rivers University on-campus residence and conference centre.",R.drawable.tru_res, true));
         landmarks.add(7, new LandMark(8, "Student Union",50.67306511025329,-120.3659860168475, "Thompson Rivers University Student Union Building.",R.drawable.stu_union, true));
         landmarks.add(8, new LandMark(9, "Arts & Education",50.67308843269605,-120.3647585945219, "Where you will find 90% of the Arts Faculty offices and where many arts classes are taught.",R.drawable.tru_ae, true));
@@ -86,71 +96,5 @@ public class LandmarkMapAdapter {
         landmarks.add(52, new LandMark(53, "Campus Commons",50.67253647483558,-120.36525809670921, "A large circular area in the heart of campus where people do things like study, play catch with friends, or take a nap in the grass.",R.drawable.stu_union, true));
         landmarks.add(53, new LandMark(54, "Campus Courts",50.67114893860972,-120.36400702930285, "Two basketball courts on campus that you will often find people playing on.",R.drawable.stu_union, true));
     }
-
-    public static void LoadUserLandmarks(){
-        // TEST LANDMARKS
-
-        ulandmarks.add(0, new LandMark(1, "???", 50.66107816, -120.2600196, "???",R.drawable.juniper_park, false));
-        ulandmarks.add(1, new LandMark(2, "???", 50.66165625, -120.26141435, "???",R.drawable.juniper_park_dog, false));
-        ulandmarks.add(2, new LandMark(3, "???", 50.661075, -120.262175, "???",R.drawable.juniper_round, false));
-        ulandmarks.add(3, new LandMark(4, "???", 50.66047354404017,-120.26587107479637, "???", R.drawable.juniper_1649_cwd, false));
-        ulandmarks.add(4, new LandMark(5, "???", 50.66148690676339,-120.26273020803993, "???", R.drawable.juniper_market, false));
-        ulandmarks.add(5, new LandMark(6, "???", 50.661299864433, -120.26571575592384, "???",R.drawable.juniper_terrace, false));
-
-        //TRU LANDMARKS
-
-        ulandmarks.add(6, new LandMark(7, "???",50.673744200166574, -120.36742125670973, "???",R.drawable.tru_res, false));
-        ulandmarks.add(7, new LandMark(8, "???",50.67306511025329,-120.3659860168475, "???",R.drawable.stu_union, false));
-        ulandmarks.add(8, new LandMark(9, "???",50.67308843269605,-120.3647585945219, "???",R.drawable.tru_ae, false));
-        ulandmarks.add(9, new LandMark(10, "???",50.673219010247934,-120.3675127020705, "???",R.drawable.tru_hortic_building, false));
-        ulandmarks.add(10, new LandMark(11, "???",50.67291549862759,-120.36737384617643, "???",R.drawable.tru_star, false));
-        ulandmarks.add(11, new LandMark(12, "???",50.672729365684205,-120.36724375903921, "???",R.drawable.tru_radio, false));
-        ulandmarks.add(12, new LandMark(13, "???",50.67271252838339,-120.3660271474017, "???",R.drawable.tru_cac, false));
-        ulandmarks.add(13, new LandMark(14, "???",50.67276265802898,-120.3664196997232, "???",R.drawable.tru_grandhall, false));
-        ulandmarks.add(14, new LandMark(15, "???",50.67251908739977,-120.36635402706865, "???",R.drawable.tru_bookstore, false));
-        ulandmarks.add(15, new LandMark(16, "???",50.672509483925914,-120.36425636880844, "???",R.drawable.stu_union, false));
-        ulandmarks.add(16, new LandMark(17, "???",50.671977174016675,-120.37124423347721, "???",R.drawable.stu_union, false));
-        ulandmarks.add(17, new LandMark(18, "???",50.67164516323322,-120.3685772417573, "???",R.drawable.stu_union, false));
-        ulandmarks.add(18, new LandMark(19, "???",50.67222137879659,-120.36909245606684, "???",R.drawable.stu_union, false));
-        ulandmarks.add(19, new LandMark(20, "???",50.6722913473477,-120.36328871840358, "???",R.drawable.stu_union, false));
-        ulandmarks.add(20, new LandMark(21, "???",50.67124180813051,-120.36343808725802, "???",R.drawable.stu_union, false));
-        ulandmarks.add(21, new LandMark(22, "???",50.67121855843365,-120.36282610219945, "???",R.drawable.stu_union, false));
-        ulandmarks.add(22, new LandMark(23, "???",50.670682236191006,-120.36280330342282, "???",R.drawable.stu_union, false));
-        ulandmarks.add(23, new LandMark(24, "???",50.6715738366722,-120.36336522621144, "???",R.drawable.stu_union, false));
-        ulandmarks.add(24, new LandMark(25, "???",50.670473995317074,-120.36106657308568, "???",R.drawable.stu_union, false));
-        ulandmarks.add(25, new LandMark(26, "???",50.67032185140069,-120.36107327860822, "???",R.drawable.stu_union, false));
-        ulandmarks.add(26, new LandMark(27, "???",50.67127271305015,-120.36648216951284, "???",R.drawable.stu_union, false));
-        ulandmarks.add(27, new LandMark(28, "???",50.671311203018206,-120.36589857262601, "???",R.drawable.stu_union, false));
-        ulandmarks.add(28, new LandMark(29, "???",50.670992050281896,-120.36578946370827, "???",R.drawable.stu_union, false));
-        ulandmarks.add(29, new LandMark(30, "???",50.670411705627245,-120.36071676123532, "???",R.drawable.stu_union, false));
-        ulandmarks.add(30, new LandMark(31, "???",50.670543450135774,-120.36534759509954, "???",R.drawable.stu_union, false));
-        ulandmarks.add(31, new LandMark(32, "???",50.67066669466389,-120.36553400862607, "???",R.drawable.stu_union, false));
-        ulandmarks.add(32, new LandMark(33, "???",50.67053665042826,-120.3646207164565, "???",R.drawable.stu_union, false));
-        ulandmarks.add(33, new LandMark(34, "???",50.67204276159273,-120.36522153127584, "???",R.drawable.stu_union, false));
-        ulandmarks.add(34, new LandMark(35, "???",50.67040320596886,-120.36543744910153, "???",R.drawable.stu_union, false));
-        ulandmarks.add(35, new LandMark(36, "???",50.671735083668246,-120.36565068471822, "???",R.drawable.stu_union, false));
-        ulandmarks.add(36, new LandMark(37, "???",50.669883023945324,-120.36492246497068, "???",R.drawable.stu_union, false));
-        ulandmarks.add(37, new LandMark(38, "???",50.66958638161595,-120.36395284641179, "???",R.drawable.stu_union, false));
-        ulandmarks.add(38, new LandMark(39, "???",50.669181789056246,-120.36276194560918, "???",R.drawable.stu_union, false));
-        ulandmarks.add(39, new LandMark(40, "???",50.66969432904156,-120.36175209391507, "???",R.drawable.stu_union, false));
-        ulandmarks.add(40, new LandMark(41, "???",50.66837429348177,-120.36317232358846, "???",R.drawable.stu_union, false));
-        ulandmarks.add(41, new LandMark(42, "???",50.66844226589624,-120.36587026401604, "???",R.drawable.stu_union, false));
-        ulandmarks.add(42, new LandMark(43, "???",50.66901469733846,-120.36549709831604, "???",R.drawable.stu_union, false));
-        ulandmarks.add(43, new LandMark(44, "???",50.669696807128936,-120.36708170049145, "???",R.drawable.stu_union, false));
-        ulandmarks.add(44, new LandMark(45, "???",50.67099104693188,-120.37092112743797, "???",R.drawable.stu_union, false));
-        ulandmarks.add(45, new LandMark(46, "???",50.670316177593,-120.36164336645545, "???",R.drawable.stu_union, false));
-        ulandmarks.add(46, new LandMark(47, "???",50.669967689627256,-120.36281549179496, "???",R.drawable.stu_union, false));
-        ulandmarks.add(47, new LandMark(48, "???",50.66966509797827,-120.36303006851615, "???",R.drawable.stu_union, false));
-        ulandmarks.add(48, new LandMark(49, "???",50.67101314576379,-120.36840789759101, "???",R.drawable.stu_union, false));
-        ulandmarks.add(49, new LandMark(50, "???",50.67063406435922,-120.36083065712394, "???",R.drawable.stu_union, false));
-        ulandmarks.add(50, new LandMark(51, "???",50.672373053865186,-120.37059658014716, "???",R.drawable.stu_union, false));
-        ulandmarks.add(51, new LandMark(52, "???",50.67239005246715,-120.36713384830894, "???",R.drawable.stu_union, false));
-        ulandmarks.add(52, new LandMark(53, "???",50.67253647483558,-120.36525809670921, "???",R.drawable.stu_union, false));
-        ulandmarks.add(53, new LandMark(54, "???",50.67114893860972,-120.36400702930285, "???",R.drawable.stu_union, false));
-
-    }
-
-    public ArrayList<LandMark> getUserLandmarks() {
-        return ulandmarks;
-    }
+    */
 }

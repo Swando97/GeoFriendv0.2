@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CurrentLocation"
+    tools:context=".VisitedLandmarksActivity"
     android:alpha="0.90"
     android:background="@drawable/bluegradient">
 
@@ -25,7 +25,8 @@
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="36sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="RtlCompat" />
 
         <Space
             android:layout_width="match_parent"

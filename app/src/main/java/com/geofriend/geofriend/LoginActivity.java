@@ -10,25 +10,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.geofriend.geofriend.databinding.ActivityLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -52,6 +42,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //Initialize Firebase Authentication
         mAuth = FirebaseAuth.getInstance();
 
+        databaseConnection.readLandmarkData();
+
+
         //INSTANTIATING DATABINDING
         //Loads activity_login.xml Layout file
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_login);
@@ -70,15 +63,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //Loads User information into the UI
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
+
     }
 
     @Override
     protected void onStop() {
+
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
+
         super.onDestroy();
     }
 
@@ -235,10 +231,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     private void signOut() {
-        databaseConnection.updateUserData(databaseConnection.getUserID());
         mAuth.signOut();
         updateUI(null);
-
     }
 
     @Override
@@ -255,11 +249,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } else if (i == R.id.signOutButton) {
             signOut();
         } else if (i == R.id.exploreButton) {
-            Intent toExplore = new Intent(LoginActivity.this, MapsActivity.class);
-            startActivity(toExplore);
+            if(databaseConnection.getUserID() != null){
+                Intent toExplore = new Intent(LoginActivity.this, MapsActivity.class);
+                startActivity(toExplore);
+            }
+            else
+                Toast.makeText(LoginActivity.this, "User ID is null. Could not load map or landmarks. Please sign out and sign in again.", Toast.LENGTH_SHORT).show();
+
         } else if (i == R.id.geofenceButton){
-            Intent toGeofence = new Intent (this, CurrentLocation.class);
-            startActivity(toGeofence);
+            if(databaseConnection.getUserID() != null){
+                Intent toGeofence = new Intent (this, VisitedLandmarksActivity.class);
+                startActivity(toGeofence);
+            }
+            else
+                Toast.makeText(LoginActivity.this, "User ID is null. Could not load map or landmarks. Please sign out and sign in again.", Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -4,6 +4,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LandMark {
 
     //GLOBALS
@@ -48,10 +51,6 @@ public class LandMark {
 
     }
 
-
-
-
-
     public String getName() {
         return mName;
     }
@@ -62,6 +61,22 @@ public class LandMark {
 
     public LatLng getLocation() {
         return mLocation;
+    }
+
+    public double getLatitude(){
+        return mLatitude;
+    }
+
+    public void setLatitude(double mLatitude){
+        this.mLatitude = mLatitude;
+    }
+
+    public double getLongitude(){
+        return mLongitude;
+    }
+
+    public void setLongitude(double mLongitude){
+        this.mLongitude = mLongitude;
     }
 
     public void setLocation(double mLatitude, double mLongitude) {

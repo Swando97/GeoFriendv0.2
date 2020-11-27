@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.method.ScrollingMovementMethod;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -35,7 +36,7 @@ public class LandmarkPopUpActivity extends AppCompatActivity {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
-        final LandmarkMapAdapter lma = new LandmarkMapAdapter();
+
 
         int width = dm.widthPixels;
         int height = dm.heightPixels;
@@ -65,25 +66,19 @@ public class LandmarkPopUpActivity extends AppCompatActivity {
         visitButton = (Button) findViewById(R.id.visit_button);
 
 //        landmarkDesc.setText("Butts");
-        landmarkName.setText(lma.ulandmarks.get(Integer.parseInt(landmarkID)).getName());
-        landmarkDesc.setText(lma.ulandmarks.get(Integer.parseInt(landmarkID)).getDesc());
-        landmarkPic.setImageResource(lma.ulandmarks.get(Integer.parseInt(landmarkID)).getImage());
+        landmarkName.setText(LandmarkMapAdapter.landmarks.get(Integer.parseInt(landmarkID)).getName());
+        landmarkDesc.setText(LandmarkMapAdapter.landmarks.get(Integer.parseInt(landmarkID)).getDesc());
+        landmarkPic.setImageResource(LandmarkMapAdapter.landmarks.get(Integer.parseInt(landmarkID)).getImage());
 
         visitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(lma.ulandmarks.get(Integer.parseInt(landmarkID)).isVisited() == false) {
-                    Toast.makeText(LandmarkPopUpActivity.this, "Visited Landmark: " + landmarkID, Toast.LENGTH_LONG).show();
-                    lma.ulandmarks.set(Integer.parseInt(landmarkID), lma.landmarks.get(Integer.parseInt(landmarkID)));
-
-                    landmarkName.setText(lma.ulandmarks.get(Integer.parseInt(landmarkID)).getName());
-                    landmarkDesc.setText(lma.ulandmarks.get(Integer.parseInt(landmarkID)).getDesc());
+                    Toast.makeText(LandmarkPopUpActivity.this, "Visited Landmark: " + LandmarkMapAdapter.landmarks.get(Integer.parseInt(landmarkID)).getName(), Toast.LENGTH_LONG).show();
+                    if(!LandmarkMapAdapter.userLandmarks.contains(LandmarkMapAdapter.landmarks.get(Integer.parseInt(landmarkID)))) {
+                        LandmarkMapAdapter.userLandmarks.add(LandmarkMapAdapter.userLandmarks.size(), LandmarkMapAdapter.landmarks.get(Integer.parseInt(landmarkID)));
+                    }
 
                     databaseConnection.updateUserData(databaseConnection.getUserID());
-                }
-                else{
-                    Toast.makeText(LandmarkPopUpActivity.this, "Landmark " + landmarkID + " has already been visited.", Toast.LENGTH_LONG).show();
-                }
             }
         });
 

@@ -12,27 +12,21 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
-import android.os.SystemClock;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingClient;
 import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
@@ -40,7 +34,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -65,7 +58,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private UiSettings mUI;
-    LandmarkMapAdapter lma = new LandmarkMapAdapter();
+
 
     DatabaseConnection databaseConnection = new DatabaseConnection();
 
@@ -94,12 +87,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
         //Loads landmarks into the adapter instance
-        if (lma.landmarks.isEmpty()) {
-            lma.loadLandmarks();
+        if (LandmarkMapAdapter.landmarks.isEmpty()) {
+            LandmarkMapAdapter.loadLandmarks();
         }
-        if (lma.ulandmarks.isEmpty()) {
-            lma.LoadUserLandmarks();
-        }
+
+
+
 
 //        userLocation = findViewById(R.id.landMarkTxt);
 
@@ -179,19 +172,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //THIS SECTION OF CODE IS RUN WHEN THE MAP OPENS UP
         //  IT CHECKS TO SEE IF THERE'S LANDMARKS IN THE LIST, THEN LOADS THEM INTO THE MAP
-        if (!lma.landmarks.isEmpty()) {
-            for (int i = 0; i < lma.landmarks.size(); i++) {
+        if (!LandmarkMapAdapter.landmarks.isEmpty()) {
+            for (int i = 0; i < LandmarkMapAdapter.landmarks.size(); i++) {
                 //GETS LANDMARK AT POSITION i AND PUTS IT ONTO THE MAP
-                mMap.addMarker(new MarkerOptions().position(lma.landmarks.get(i).getLocation()).title(lma.landmarks.get(i).getName()).icon(BitmapDescriptorFactory.fromResource(R.drawable.landmark)));
+                mMap.addMarker(new MarkerOptions().position(new LatLng(LandmarkMapAdapter.landmarks.get(i).getLatitude(),LandmarkMapAdapter.landmarks.get(i).getLongitude())).title(LandmarkMapAdapter.landmarks.get(i).getName()).icon(BitmapDescriptorFactory.fromResource(R.drawable.landmark)));
                 //A GEOFENCE IS THEN BUILT AROUND THE LANDMARK
               
 
                 if (Build.VERSION.SDK_INT >= 29) {
                     //We need background permission
                     if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                          addCircle(lma.landmarks.get(i).getLocation(), GEOFENCE_RADIUS);
+                          addCircle(new LatLng(LandmarkMapAdapter.landmarks.get(i).getLatitude(),LandmarkMapAdapter.landmarks.get(i).getLongitude()), GEOFENCE_RADIUS);
 
-                        addGeofence(lma.landmarks.get(i).getLocation(), GEOFENCE_RADIUS, lma.landmarks.get(i).getName());
+                        addGeofence(new LatLng(LandmarkMapAdapter.landmarks.get(i).getLatitude(),LandmarkMapAdapter.landmarks.get(i).getLongitude()), GEOFENCE_RADIUS, LandmarkMapAdapter.landmarks.get(i).getName());
                     } else {
                         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
                             //We show a dialog and ask for permission
@@ -202,8 +195,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }
 
                 } else {
-                    addCircle(lma.landmarks.get(i).getLocation(), GEOFENCE_RADIUS);
-                    addGeofence(lma.landmarks.get(i).getLocation(), GEOFENCE_RADIUS, lma.landmarks.get(i).getName());
+                    addCircle(LandmarkMapAdapter.landmarks.get(i).getLocation(), GEOFENCE_RADIUS);
+                    addGeofence(LandmarkMapAdapter.landmarks.get(i).getLocation(), GEOFENCE_RADIUS, LandmarkMapAdapter.landmarks.get(i).getName());
                 }
             } // END OF LOOP
         } // END OF IF STATEMENT
@@ -245,7 +238,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 // WHEN MARKER IS CLICKED, THE MARKER ID IS PASSED THROUGH AN INTENT TO LandmarkPopUpActivity.class
                 // THEN THE ACTIVITY IS OPENED
                 //int markerClick = Log.v("click", "Markerclick");
-                mMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(lma.landmarks.get(Integer.parseInt(marker.getId().substring(1))).getLocation().latitude, lma.landmarks.get(Integer.parseInt(marker.getId().substring(1))).getLocation().longitude)));
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(LandmarkMapAdapter.landmarks.get(Integer.parseInt(marker.getId().substring(1))).getLatitude(), LandmarkMapAdapter.landmarks.get(Integer.parseInt(marker.getId().substring(1))).getLongitude())));
 
                 Intent intent = new Intent(MapsActivity.this, LandmarkPopUpActivity.class);
                 intent.putExtra("landmarkID", marker.getId().substring(1));
@@ -329,7 +322,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onStop() {
         super.onStop();
-        databaseConnection.updateUserData(databaseConnection.getUserID());
+//        databaseConnection.updateUserData(databaseConnection.getUserID());
     }
 
     private void addCircle(LatLng latLng, float radius) {
