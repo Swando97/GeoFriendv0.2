@@ -151,7 +151,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mUI.setZoomControlsEnabled(false);
         mUI.setMyLocationButtonEnabled(false);
 
-        mMap.setMinZoomPreference(15.0f);
+        mMap.setMinZoomPreference(17.5f);
+        mMap.setMaxZoomPreference(19.0f);
 
 
         // Import map style

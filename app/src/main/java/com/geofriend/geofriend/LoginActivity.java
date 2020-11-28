@@ -3,6 +3,7 @@ package com.geofriend.geofriend;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -63,6 +64,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //Loads User information into the UI
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
+        if(currentUser!=null)
+            databaseConnection.readUserData(currentUser.getUid());
+        //Toast.makeText(this, "Updated UI with user: "+currentUser.getUid(), Toast.LENGTH_SHORT).show();
 
     }
 

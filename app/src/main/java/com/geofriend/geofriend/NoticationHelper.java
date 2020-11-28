@@ -48,9 +48,9 @@ public class NoticationHelper extends ContextWrapper {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 267, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setSmallIcon(R.drawable.landmark)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setStyle(new NotificationCompat.BigTextStyle().setSummaryText("Summary: ").setBigContentTitle(title).bigText(body))
+                .setStyle(new NotificationCompat.BigTextStyle().setSummaryText("You are within distance of a Landmark!\nOpen GeoFriend to visit it now!").setBigContentTitle(title).bigText(body))
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
                 .build();
