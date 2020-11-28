@@ -195,8 +195,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }
 
                 } else {
-                    addCircle(LandmarkMapAdapter.landmarks.get(i).getLocation(), GEOFENCE_RADIUS);
-                    addGeofence(LandmarkMapAdapter.landmarks.get(i).getLocation(), GEOFENCE_RADIUS, LandmarkMapAdapter.landmarks.get(i).getName());
+                    addCircle(new LatLng(LandmarkMapAdapter.landmarks.get(i).getLatitude(),LandmarkMapAdapter.landmarks.get(i).getLongitude()), GEOFENCE_RADIUS);
+                    addGeofence(new LatLng(LandmarkMapAdapter.landmarks.get(i).getLatitude(),LandmarkMapAdapter.landmarks.get(i).getLongitude()), GEOFENCE_RADIUS, LandmarkMapAdapter.landmarks.get(i).getName());
                 }
             } // END OF LOOP
         } // END OF IF STATEMENT
