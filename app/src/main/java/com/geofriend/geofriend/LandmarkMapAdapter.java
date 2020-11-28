@@ -39,6 +39,7 @@ public class LandmarkMapAdapter {
             landmarks.add(i, DatabaseConnection.mapLandmarks.get(i));
         }
         landmarks.add(54, new LandMark(55, "GeoFence Test",50.660465686907706,-120.26588671471292, "House",R.drawable.stu_union, true));
+        landmarks.add(55, new LandMark(56, "GeoFence Test",37.4221,-122.0841, "House",R.drawable.stu_union, true));
     }
 
     public static void loadDiscoveredLandmarks(){

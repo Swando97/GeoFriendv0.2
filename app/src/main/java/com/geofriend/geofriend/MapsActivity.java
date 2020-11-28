@@ -107,7 +107,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 getAddress();
 
                 //Moves camera to Current Position
-                //mMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude())));
+
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude())));
                 //mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude())));
             }
         };
@@ -300,7 +301,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         private void showResults(String currentAdd) {
-            //Log.d("onReceive", "Current Address:\n"+currentAdd);
+            Log.d("onReceive", "Current Address:\n"+cLat+", "+cLng);
         }
     }
 
