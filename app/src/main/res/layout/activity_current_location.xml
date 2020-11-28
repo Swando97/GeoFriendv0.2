@@ -21,9 +21,16 @@
             android:layout_height="142dp"
             android:fontFamily="@font/aldrich"
             android:gravity="fill_vertical"
+
+            android:shadowColor="#000000"
+            android:shadowDx="1.9"
+            android:shadowDy="1.9"
+            android:shadowRadius="2.0"
+            android:textColor="#D1CFCF"
+
             android:text="Landmarks"
             android:textAlignment="center"
-            android:textColor="#000000"
+
             android:textSize="36sp"
             android:textStyle="bold"
             tools:ignore="RtlCompat" />

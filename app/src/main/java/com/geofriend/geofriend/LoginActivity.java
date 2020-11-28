@@ -103,17 +103,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void updateUI(FirebaseUser user) {
         //hideProgressBar();
         if (user != null) {
-            mBinding.status.setText(R.string.signed_in);
-            mBinding.detail.setText(R.string.app_name);
-
             mBinding.emailPasswordButtons.setVisibility(View.GONE);
             mBinding.emailPasswordFields.setVisibility(View.GONE);
             mBinding.signedInButtons.setVisibility(View.VISIBLE);
 
         } else {
-            mBinding.status.setText(R.string.signed_out);
-            mBinding.detail.setText(null);
-
             mBinding.emailPasswordButtons.setVisibility(View.VISIBLE);
             mBinding.emailPasswordFields.setVisibility(View.VISIBLE);
             mBinding.signedInButtons.setVisibility(View.GONE);
@@ -221,7 +215,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                         }
                         if (!task.isSuccessful()) {
-                            mBinding.status.setText(R.string.auth_failed);
+                            Toast.makeText(LoginActivity.this, ""+R.string.auth_failed, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

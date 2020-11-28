@@ -18,7 +18,13 @@
         android:paddingRight="10dp"
         android:text="Landmark Name"
         android:textAlignment="center"
-        android:textColor="#100F0F"
+
+        android:shadowColor="#000000"
+        android:shadowDx="1.9"
+        android:shadowDy="1.9"
+        android:shadowRadius="2.0"
+        android:textColor="#D1CFCF"
+
         android:textSize="27sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,12 +37,14 @@
         android:layout_width="128dp"
         android:layout_height="128dp"
         android:layout_marginTop="24dp"
+        android:background="@drawable/border"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/landmarkName"
-        app:srcCompat="@drawable/logo" />
+
+        app:srcCompat="@drawable/image4" />
 
     <TextView
         android:id="@+id/landmarkDescription"
@@ -47,7 +55,13 @@
         android:scrollbars="vertical"
         android:text="Click me to learn about this landmark!"
         android:textAlignment="center"
-        android:textColor="#100F0F"
+
+        android:shadowColor="#000000"
+        android:shadowDx="1.9"
+        android:shadowDy="1.9"
+        android:shadowRadius="2.0"
+        android:textColor="#D1CFCF"
+
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
