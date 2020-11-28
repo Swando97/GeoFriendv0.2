@@ -144,13 +144,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         enableUserLocation();
         mUI = mMap.getUiSettings();
 
-        //mUI.setScrollGesturesEnabled(false);
+        mUI.setScrollGesturesEnabled(false);
         mUI.setCompassEnabled(false);
-        //mUI.setScrollGesturesEnabledDuringRotateOrZoom(false);
+        mUI.setScrollGesturesEnabledDuringRotateOrZoom(false);
         mUI.setZoomControlsEnabled(false);
         mUI.setMyLocationButtonEnabled(false);
 
-        mMap.setMinZoomPreference(12.0f);
+        mMap.setMinZoomPreference(15.0f);
 
 
         // Import map style

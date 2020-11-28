@@ -31,7 +31,6 @@ public class DatabaseConnection {
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public static List<LandMark> userLandmarks;
     public static List<LandMark> mapLandmarks;
     public static List<LandMark> discoveredLandmarks = new ArrayList<>();
 
@@ -84,12 +83,14 @@ public class DatabaseConnection {
 
                         //CONTAINS LIST OF LandMark objects
 
+
                         DatabaseConnection.discoveredLandmarks = document.toObject(LandmarkDocument.class).landmarks;
 
+
                         //DISPLAYS CONTENT OF ARRAY
-                        for(int i=0; i<discoveredLandmarks.size();i++){
-                            Log.v("DatabaseRead", "Read: "+DatabaseConnection.discoveredLandmarks.get(i).getID());
-                        }
+
+                            Log.v("DatabaseRead", "Read: "+discoveredLandmarks);
+
 
                     }
                     if(!document.exists()){

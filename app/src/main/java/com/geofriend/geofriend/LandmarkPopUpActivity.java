@@ -73,11 +73,13 @@ public class LandmarkPopUpActivity extends AppCompatActivity {
         visitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Toast.makeText(LandmarkPopUpActivity.this, "Visited Landmark: " + LandmarkMapAdapter.landmarks.get(Integer.parseInt(landmarkID)).getName(), Toast.LENGTH_LONG).show();
-                    if(!LandmarkMapAdapter.userLandmarks.contains(LandmarkMapAdapter.landmarks.get(Integer.parseInt(landmarkID)))) {
+
+                    if(!LandmarkMapAdapter.containsID(LandmarkMapAdapter.userLandmarks, LandmarkMapAdapter.landmarks.get(Integer.parseInt(landmarkID)).getID())) {
+                        Toast.makeText(LandmarkPopUpActivity.this, "Visited Landmark: " + LandmarkMapAdapter.landmarks.get(Integer.parseInt(landmarkID)).getName(), Toast.LENGTH_SHORT).show();
                         LandmarkMapAdapter.userLandmarks.add(LandmarkMapAdapter.userLandmarks.size(), LandmarkMapAdapter.landmarks.get(Integer.parseInt(landmarkID)));
                     }
-
+                    else
+                        Toast.makeText(LandmarkPopUpActivity.this, "Landmark: " + LandmarkMapAdapter.landmarks.get(Integer.parseInt(landmarkID)).getName()+" has already been visited.", Toast.LENGTH_SHORT).show();
                     databaseConnection.updateUserData(databaseConnection.getUserID());
             }
         });

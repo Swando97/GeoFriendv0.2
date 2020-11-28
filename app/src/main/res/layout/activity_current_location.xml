@@ -36,6 +36,8 @@
             android:id="@+id/listViewLocations"
             android:layout_width="wrap_content"
             android:layout_height="492dp"
+            android:background="#BC62BC50"
+            android:backgroundTint="#B062C552"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

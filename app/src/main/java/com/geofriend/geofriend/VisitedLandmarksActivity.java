@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.gms.location.GeofencingClient;
 import com.google.android.gms.location.LocationServices;
@@ -37,15 +38,11 @@ public class VisitedLandmarksActivity extends AppCompatActivity {
         //ListView instantiation
         listViewLocationDisplay = findViewById(R.id.listViewLocations);
 
-        // Array List for LandMark Locations and Adapter Instantiation
+        // Load Visited Landmarks into a local list.
         if (LandmarkMapAdapter.userLandmarks.isEmpty()){
             LandmarkMapAdapter.loadDiscoveredLandmarks();
         }
-        /*
-        if (LandmarkMapAdapter.ulandmarks.isEmpty()){
-            LandmarkMapAdapter.LoadMaskLandmarks();
-        }
-        */
+
 
         //
         //ArrayList<LandMark> loadedLandmarks = (ArrayList<LandMark>) DatabaseConnection.userLandmarks;
@@ -63,13 +60,13 @@ public class VisitedLandmarksActivity extends AppCompatActivity {
         listViewLocationDisplay.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(VisitedLandmarksActivity.this, LandmarkPopUpActivity.class);
-                intent.putExtra("landmarkID", ""+position);
+//                Intent intent = new Intent(VisitedLandmarksActivity.this, LandmarkPopUpActivity.class);
+//                intent.putExtra("landmarkID", ""+position);
 
-                //Toast.makeText(VisitedLandmarksActivity.this, ""+position, Toast.LENGTH_LONG).show();
+                Toast.makeText(VisitedLandmarksActivity.this, ""+LandmarkMapAdapter.userLandmarks.get(position).getName(), Toast.LENGTH_LONG).show();
 
                 //Load the PopUpActivity Window
-                startActivity(intent);
+                //startActivity(intent);
             }
         });
 
