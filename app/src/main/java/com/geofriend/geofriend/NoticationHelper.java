@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 
@@ -49,6 +50,7 @@ public class NoticationHelper extends ContextWrapper {
 
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.landmark)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.logo))
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setStyle(new NotificationCompat.BigTextStyle().setSummaryText("You are within distance of a Landmark!\nOpen GeoFriend to visit it now!").setBigContentTitle(title).bigText(body))
                 .setContentIntent(pendingIntent)
