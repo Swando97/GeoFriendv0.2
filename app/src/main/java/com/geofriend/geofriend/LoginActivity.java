@@ -45,6 +45,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         databaseConnection.readLandmarkData();
 
+        //Add Landmarks
+        //LandmarkMapAdapter.addLandmarks();
+
 
         //INSTANTIATING DATABINDING
         //Loads activity_login.xml Layout file
@@ -229,6 +232,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     private void signOut() {
+//        databaseConnection.updateUserData(databaseConnection.getUserID());
         mAuth.signOut();
         updateUI(null);
     }

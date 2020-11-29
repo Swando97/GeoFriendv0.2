@@ -324,7 +324,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onStop() {
         super.onStop();
-//        databaseConnection.updateUserData(databaseConnection.getUserID());
+        databaseConnection.updateUserData(databaseConnection.getUserID());
     }
 
     private void addCircle(LatLng latLng, float radius) {

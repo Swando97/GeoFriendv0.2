@@ -46,7 +46,7 @@ public class DatabaseConnection {
 
 
         user.put("landmarks", LandmarkMapAdapter.userLandmarks);
-
+        //user.put("landmarks", LandmarkMapAdapter.landmarks);
 
         documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
