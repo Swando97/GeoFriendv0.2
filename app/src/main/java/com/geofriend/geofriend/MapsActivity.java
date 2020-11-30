@@ -272,8 +272,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void getAddress() {
         if (!Geocoder.isPresent()) {
-            Toast.makeText(MapsActivity.this, "Can't find current address, ",
-                    Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MapsActivity.this, "Can't find current address, ", Toast.LENGTH_SHORT).show();
+            Log.v("noAddress","Can't find current address");
             return;
         }
         Intent intent = new Intent(this, GetAddressIntentService.class);
@@ -295,7 +295,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 getAddress();
             }
             if (resultCode == 1) {
-                Toast.makeText(MapsActivity.this, "Address not found, ", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MapsActivity.this, "Address not found, ", Toast.LENGTH_SHORT).show();
+                Log.v("noAddress","Address not found.");
             }
             String currentAdd = resultData.getString("address_result");
             showResults(currentAdd);

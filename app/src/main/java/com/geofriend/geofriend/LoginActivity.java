@@ -66,11 +66,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onStart();
         //Loads User information into the UI
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
-        if(currentUser!=null)
+        updateUI(null);
+        if(currentUser!=null){
             databaseConnection.readUserData(currentUser.getUid());
+            updateUI(mAuth.getCurrentUser());
+        }
+
         //Toast.makeText(this, "Updated UI with user: "+currentUser.getUid(), Toast.LENGTH_SHORT).show();
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 
     @Override
@@ -81,6 +89,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     protected void onDestroy() {
+        mAuth.signOut();
+        Log.v("signOut", "Signed Out");
 
         super.onDestroy();
     }
@@ -234,6 +244,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void signOut() {
 //        databaseConnection.updateUserData(databaseConnection.getUserID());
         mAuth.signOut();
+
         updateUI(null);
     }
 
