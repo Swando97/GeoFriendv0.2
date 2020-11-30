@@ -169,33 +169,38 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         EditText et1 = findViewById(R.id.fieldPassword);
         password = et1.getText().toString();
 
+
         // CREATE USER PROCESS
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+
                         if (task.isSuccessful()) {
 
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d("TAG", "createUserWithEmail:success");
+                                Log.d("TAG", "createUserWithEmail:success");
 
-                            Toast.makeText(LoginActivity.this, "User Creation Successful. Firebase Updated.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this, "User Creation Successful. Firebase Updated.", Toast.LENGTH_LONG).show();
 
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            sendEmailVerification();
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                sendEmailVerification();
 
-                            //updateUI(user);
-                        } else {
+                                //updateUI(user);
+                            } else {
 
-                            // If sign in fails, display a message to the user.
-                            Log.w("TAG", "createUserWithEmail:failure", task.getException());
+                                // If sign in fails, display a message to the user.
+                                Log.w("TAG", "createUserWithEmail:failure", task.getException());
 
-                            Toast.makeText(LoginActivity.this, "User Creation Failed.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this, "User Creation Failed.", Toast.LENGTH_LONG).show();
 
-                            updateUI(null);
+                                updateUI(null);
+                            }
                         }
-                    }
+
                 });
+
+
     }
 
     private void signIn(String email, String password) {
@@ -254,11 +259,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (i == R.id.emailCreateAccountButton) {
             email = mBinding.fieldEmail.getText().toString();
             password = mBinding.fieldPassword.getText().toString();
-            createAccount(email, password);
+            if(!email.equals("") || !password.equals("") )
+                createAccount(email, password);
+            else
+                Toast.makeText(this, "Please enter a valid email and password to create a new user account.", Toast.LENGTH_LONG).show();
+                Log.v("createError","Error: No username or password detected.");
         } else if (i == R.id.emailSignInButton) {
             email = mBinding.fieldEmail.getText().toString();
             password = mBinding.fieldPassword.getText().toString();
-            signIn(email, password);
+            if(!email.equals("") || !password.equals("") )
+                signIn(email, password);
+            else
+                Toast.makeText(this, "Please enter a valid email and password to sign in.", Toast.LENGTH_LONG).show();
+            Log.v("signInError","Error: No username or password detected.");
         } else if (i == R.id.signOutButton) {
             signOut();
         } else if (i == R.id.exploreButton) {
