@@ -46,7 +46,7 @@ public class LandmarkMapAdapter {
     public static void addLandmarks(){
 
         //JUNIPER LANDMARKS
-
+/*
         landmarks.add(0, new LandMark(1, "Juniper Park", 50.66107816, -120.2600196, "A park in Juniper Ridge where neighbourhood locals go to play hockey, tennis, or have fun on the playground with friends.",R.drawable.juniper_park, true));
         landmarks.add(1, new LandMark(2, "Juniper Dog Park", 50.66165625, -120.26141435, "A dog park in Juniper Ridge that was built to replace a Baseball Diamond. You will often find many neighbourhood locals here playing with their dogs.",R.drawable.juniper_park_dog, true));
         landmarks.add(2, new LandMark(3, "Juniper Roundabout", 50.661075, -120.262175, "A roundabout in Juniper Ridge that was built to replace a 3-Way-Stop. Nobody knows how to use the roundabout but there's been significantly fewer accidents since installation.",R.drawable.juniper_round, true));
@@ -104,6 +104,7 @@ public class LandmarkMapAdapter {
         landmarks.add(51, new LandMark(52, "Horticulture Gardens",50.67239005246715,-120.36713384830894, "Beautiful gardens maintained by the horticulture department. This is a common destination for people to get married.",R.drawable.tru_hortic_garden, true));
         landmarks.add(52, new LandMark(53, "Campus Commons",50.67253647483558,-120.36525809670921, "A large circular area in the heart of campus where people do things like study, play catch with friends, or take a nap in the grass.",R.drawable.tru_campus_commons, true));
         landmarks.add(53, new LandMark(54, "Campus Courts",50.67114893860972,-120.36400702930285, "Two basketball courts on campus that you will often find people playing on.",R.drawable.tru_campus_basketball_courts, true));
+   */
     }
 
 

@@ -291,4 +291,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Toast.makeText(LoginActivity.this, "User ID is null. Could not load map or landmarks. Please sign out and sign in again.", Toast.LENGTH_SHORT).show();
         }
     }
+
+    public void privacypage(View v){
+        Intent intent = new Intent(getApplicationContext(),
+                PrivacyPolicyActivity.class);
+        startActivity(intent);
+    }
+
 }

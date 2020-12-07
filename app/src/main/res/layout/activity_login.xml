@@ -10,6 +10,13 @@
     android:alpha="0.90"
     android:background="@drawable/bluegradient">
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="privacypage"
+        android:text="Privacy Policy" />
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:indeterminate="true"
