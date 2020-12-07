@@ -14,8 +14,11 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="R.color.trans"
         android:onClick="privacypage"
-        android:text="Privacy Policy" />
+        android:text="Privacy Policy"
+        android:textColorHint="#FFFFFF"
+        android:textStyle="bold" />
 
     <ProgressBar
         android:id="@+id/progressBar"
