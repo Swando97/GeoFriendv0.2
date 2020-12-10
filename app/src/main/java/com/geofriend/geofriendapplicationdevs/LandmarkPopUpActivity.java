@@ -54,9 +54,9 @@ public class LandmarkPopUpActivity extends AppCompatActivity {
 
 
         //Instantiating Landmark Description and Image
-        landmarkName = findViewById(R.id.landmarkName);
+        landmarkName = findViewById(R.id.permissionsTitle);
 
-        landmarkDesc = findViewById(R.id.landmarkDescription);
+        landmarkDesc = findViewById(R.id.prominentDisclosure);
         landmarkDesc.setMovementMethod(new ScrollingMovementMethod());
 
         landmarkPic = findViewById(R.id.landmarkPic);

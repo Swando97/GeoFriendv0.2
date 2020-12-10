@@ -15,6 +15,9 @@ public class LaunchActivity extends AppCompatActivity {
     TextView launch_title, terms_of_use;
     Button accept_button;
 
+    ProminentDisclosureDialogFragment pddf = new ProminentDisclosureDialogFragment();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +26,8 @@ public class LaunchActivity extends AppCompatActivity {
         launch_title = findViewById(R.id.launchTitle);
         terms_of_use = findViewById(R.id.termsOfUse);
         accept_button = (Button) findViewById(R.id.acceptButton);
+
+        pddf.show(getSupportFragmentManager(),"PDDF");
 
         terms_of_use.setMovementMethod(new ScrollingMovementMethod());
 

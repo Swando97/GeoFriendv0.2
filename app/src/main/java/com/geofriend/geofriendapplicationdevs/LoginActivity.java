@@ -2,6 +2,7 @@ package com.geofriend.geofriendapplicationdevs;
 
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -39,6 +41,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private String email;
     private String password;
+
 
     LandmarkMapAdapter lma = new LandmarkMapAdapter();
     DatabaseConnection databaseConnection = new DatabaseConnection();
@@ -79,6 +82,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             databaseConnection.readUserData(currentUser.getUid());
             updateUI(mAuth.getCurrentUser());
         }
+
+
 
         checkPermission();
 
@@ -278,6 +283,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     REQUEST_PERMISSION_LOCATION);
         }
     }
+
+
 
 
     @Override
