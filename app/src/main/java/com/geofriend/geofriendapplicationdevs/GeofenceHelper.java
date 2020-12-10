@@ -1,4 +1,4 @@
-package com.geofriend.geofriend;
+package com.geofriend.geofriendapplicationdevs;
 
 import android.app.PendingIntent;
 import android.content.Context;

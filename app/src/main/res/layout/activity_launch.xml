@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bluegradient"
+    android:orientation="vertical"
+    android:padding="@dimen/box_inset_layout_padding"
+    android:textAlignment="center"
+    tools:context=".LaunchActivity">
+
+    <TextView
+        android:id="@+id/launchTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/aldrich"
+        android:shadowColor="#000000"
+        android:shadowDx="1.9"
+        android:shadowDy="1.9"
+
+        android:shadowRadius="2.0"
+        android:text="@string/geofriend_title_text"
+        android:textAlignment="center"
+        android:textColor="#D1CFCF"
+        android:textSize="48sp" />
+
+    <TextView
+        android:id="@+id/termsOfUse"
+        android:layout_width="match_parent"
+        android:layout_height="519dp"
+        android:scrollbars="vertical"
+        android:shadowColor="#000000"
+        android:shadowDx="1.9"
+        android:shadowDy="1.9"
+        android:shadowRadius="2.0"
+        android:text="GeoFriend is an application used to discover your local and surrounding areas. GeoFriend uses Android Location Permissions and Android Background Location Permissions to determine whether or not a user is within range of a Landmark. GeoFriend also uses FireBase Authentication to provide a more individualized experience by saving user data using Cloud FireStore. GeoFriend does not intend to use the collected information for any malpurpose or redistribution. \nPlease see in-app Privacy Policy for more information.\nBy clicking below, you accept the terms of use and assume responsibility to safely and responsibly enjoy the application within the limits of the law.\n\nNote: GeoFriend Applications does not in any way support trespassing or usage in traffic."
+
+        android:textAlignment="center"
+        android:textColor="#D1CFCF"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/acceptButton"
+        android:layout_width="match_parent"
+        android:layout_height="82dp"
+        android:text="ACCEPT AND OPEN GEOFRIEND" />
+</LinearLayout>

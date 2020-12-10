@@ -11,13 +11,12 @@
     android:background="@drawable/bluegradient">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/privacyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#00000000"
-        android:onClick="privacypage"
+        android:background="#4600BCD4"
         android:text="Privacy Policy"
-        android:textColorHint="#FFFFFF"
+        android:textColorHint="#D1CFCF"
         android:textStyle="bold" />
 
     <ProgressBar

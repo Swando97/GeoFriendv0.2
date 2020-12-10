@@ -1,4 +1,4 @@
-package com.geofriend.geofriend;
+package com.geofriend.geofriendapplicationdevs;
 
 public interface LocationAddressResultReceiver {
 }

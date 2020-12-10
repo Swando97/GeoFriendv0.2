@@ -1,10 +1,8 @@
-package com.geofriend.geofriend;
+package com.geofriend.geofriendapplicationdevs;
 
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.method.ScrollingMovementMethod;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -14,7 +12,6 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class LandmarkPopUpActivity extends AppCompatActivity {
 

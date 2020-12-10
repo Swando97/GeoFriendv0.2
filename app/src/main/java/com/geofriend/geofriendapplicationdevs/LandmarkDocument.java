@@ -1,6 +1,5 @@
-package com.geofriend.geofriend;
+package com.geofriend.geofriendapplicationdevs;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LandmarkDocument {

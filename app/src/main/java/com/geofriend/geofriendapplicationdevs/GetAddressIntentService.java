@@ -1,4 +1,4 @@
-package com.geofriend.geofriend;
+package com.geofriend.geofriendapplicationdevs;
 import android.app.IntentService;
 import android.content.Intent;
 import android.location.Address;

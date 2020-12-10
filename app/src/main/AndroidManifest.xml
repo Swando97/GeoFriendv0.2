@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.geofriend.geofriend">
+    package="com.geofriend.geofriendapplicationdevs"
+    android:versionCode="6">
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-feature android:name="android.hardware.type.watch" />
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the "MyLocation" functionality.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- The INTERNET/ACCESS_FINE_LOCATION permissions are required to get users current location. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!--
+         The ACCESS_BACKGROUND_LOCATION permissions An app requires background location access
+         if a feature within the app constantly shares location with other users or uses the Geofencing API.
+         On Android 10 (API level 29) and higher, you must declare this explicitly!
+    -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -9,16 +28,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <uses-library
+            android:name="com.google.android.wearable"
+            android:required="false" />
+
+
+        <!--
+               Set to true if your app is Standalone, that is, it does not require the handheld
+               app to run.
+        -->
+        <meta-data
+            android:name="com.google.android.wearable.standalone"
+            android:value="true" />
+
         <activity
-            android:name=".PrivacyPolicyActivity"
-            android:label="@string/title_activity_privacy_policy">
+            android:name=".LaunchActivity"
+            android:label="@string/title_activity_launch">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:name=".PrivacyPolicyActivity"
+            android:label="@string/title_activity_privacy_policy" />
         <!--
                Set to true if your app is Standalone, that is, it does not require the handheld
                app to run.
@@ -26,7 +60,6 @@
         <activity
             android:name=".VisitedLandmarksActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".LandmarkPopUpActivity"
             android:screenOrientation="portrait"
@@ -46,16 +79,9 @@
         <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
-        <meta-data
-            android:name="com.google.android.wearable.standalone"
-            android:value="true" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -66,26 +92,6 @@
         <receiver android:name=".GeofenceBroadcastReceiver" />
 
         <service android:name=".GetAddressIntentService" />
-
-
     </application>
-
-    <uses-feature android:name="android.hardware.type.watch" />
-    <!--
-         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
-         Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the "MyLocation" functionality.
-    -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- The INTERNET/ACCESS_FINE_LOCATION permissions are required to get users current location. -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <!--
-         The ACCESS_BACKGROUND_LOCATION permissions An app requires background location access
-         if a feature within the app constantly shares location with other users or uses the Geofencing API.
-         On Android 10 (API level 29) and higher, you must declare this explicitly!
-    -->
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
 </manifest>

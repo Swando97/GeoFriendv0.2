@@ -1,4 +1,4 @@
-package com.geofriend.geofriend;
+package com.geofriend.geofriendapplicationdevs;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;

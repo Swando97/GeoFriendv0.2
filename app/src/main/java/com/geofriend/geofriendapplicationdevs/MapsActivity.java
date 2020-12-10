@@ -1,4 +1,4 @@
-package com.geofriend.geofriend;
+package com.geofriend.geofriendapplicationdevs;
 
 import android.Manifest;
 import android.app.PendingIntent;
@@ -14,7 +14,6 @@ import android.os.Handler;
 import android.os.ResultReceiver;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -283,7 +282,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    private class LocationAddressResultReceiver extends ResultReceiver implements com.geofriend.geofriend.LocationAddressResultReceiver {
+    private class LocationAddressResultReceiver extends ResultReceiver implements com.geofriend.geofriendapplicationdevs.LocationAddressResultReceiver {
         LocationAddressResultReceiver(Handler handler) {
             super(handler);
         }
